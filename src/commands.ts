@@ -7,10 +7,10 @@ import financialDataCommand from './models/commands/financialDataCommand.js';
 
 function createCommandHandler(): CommandHandler {
   const commands: Command[] = [
-    helpCommand, 
+    helpCommand,
     earningsCallTranscriptCommand,
     financialReportsCommand,
-    financialDataCommand
+    financialDataCommand,
   ];
 
   function getCommands() {

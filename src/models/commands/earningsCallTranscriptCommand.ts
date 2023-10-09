@@ -25,15 +25,13 @@ const earningsCallTranscriptCommand = createCommand(
 
     for (const transcript of transcripts) {
       // Summarize Transcript using OpenAI
-      var transcriptSummary = await OpenAIService.getInstance().summarizeEarningsTranscript(
-        transcript.content
-      );
+      var transcriptSummary = await OpenAIService.getInstance().summarizeEarningsTranscript(transcript.content);
       transcript.content = transcriptSummary;
 
       // Write Summarized Transcript to File
       var write = await FileReadWriteService.getInstance().saveEarningsCallTranscriptsToTextFile(symbol, transcript);
 
-      break
+      break;
     }
   }
 );

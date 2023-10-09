@@ -25,20 +25,19 @@ const financialReportsCommand = createCommand(
     var reports: Array<FMPFinancialReport> = await getFinancialReports(symbol);
 
     for (const report of reports) {
-        
-        //Gather Important Text from financial report
-        var excerts = await getImportantExcertsFromFinancialReport(report.json);
-        console.log(excerts.length)
+      //Gather Important Text from financial report
+      var excerts = await getImportantExcertsFromFinancialReport(report.json);
+      console.log(excerts.length);
 
-        // Summarizes all excerts from a financial report to be written to file
-        var excertSummaries = await OpenAIService.getInstance().summarizeText(excerts);
+      // Summarizes all excerts from a financial report to be written to file
+      var excertSummaries = await OpenAIService.getInstance().summarizeText(excerts);
 
-        // Write Summarized Financial Reports to File
-        var write = await FileReadWriteService.getInstance().saveFinancialReport(
-            report.symbol,
-            symbol + '-' + report.year + '-' + report.period,
-            excertSummaries
-        );
+      // Write Summarized Financial Reports to File
+      var write = await FileReadWriteService.getInstance().saveFinancialReport(
+        report.symbol,
+        symbol + '-' + report.year + '-' + report.period,
+        excertSummaries
+      );
     }
   }
 );

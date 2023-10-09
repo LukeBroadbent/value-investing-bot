@@ -116,42 +116,17 @@ export default class FileReadWriteService {
     // Convert JSON to Plaintext
 
     // Creates Format for Report Output
-    var text = ""
+    var text = '';
     for (var i = 0; i < data.length; i++) {
-      text = text + data[i]
-      if (i != data.length -1) {
-        text = text + "\n"
+      text = text + data[i];
+      if (i != data.length - 1) {
+        text = text + '\n';
       }
     }
 
     return new Promise(function (resolve, reject) {
-      if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + "\\")) {
-        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + fileName + ".txt", text, (err) => {
-            if (err) {
-              console.log('error', err);
-            } else {
-              resolve(true);
-            }
-          });
-      } else {
-        fs.mkdirSync(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + "\\", { recursive: true });
-        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + "\\" + fileName + ".txt", text, (err) => {
-            if (err) {
-              console.log('error', err);
-            } else {
-              resolve(true);
-            }
-          });
-      }
-    })
-  }
-
-  public async saveFinancialData(symbol: string, data: FinancialData) {
-    const fileName = symbol.toLowerCase() + '-financials-' + data.financial_year + '.json'
-
-    return new Promise(function (resolve, reject) {
-      if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + '\\')) {
-        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + fileName, JSON.stringify(data, null, 4), (err) => {
+      if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + '\\')) {
+        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + fileName + '.txt', text, (err) => {
           if (err) {
             console.log('error', err);
           } else {
@@ -159,8 +134,8 @@ export default class FileReadWriteService {
           }
         });
       } else {
-        fs.mkdirSync(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + '\\', { recursive: true });
-        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + '\\' + fileName, JSON.stringify(data, null, 4), (err) => {
+        fs.mkdirSync(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + '\\', { recursive: true });
+        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + '\\' + fileName + '.txt', text, (err) => {
           if (err) {
             console.log('error', err);
           } else {
@@ -171,10 +146,43 @@ export default class FileReadWriteService {
     });
   }
 
+  public async saveFinancialData(symbol: string, data: FinancialData) {
+    const fileName = symbol.toLowerCase() + '-financials-' + data.financial_year + '.json';
+
+    return new Promise(function (resolve, reject) {
+      if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + '\\')) {
+        fs.writeFile(
+          FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + fileName,
+          JSON.stringify(data, null, 4),
+          (err) => {
+            if (err) {
+              console.log('error', err);
+            } else {
+              resolve(true);
+            }
+          }
+        );
+      } else {
+        fs.mkdirSync(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + '\\', { recursive: true });
+        fs.writeFile(
+          FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + '\\' + fileName,
+          JSON.stringify(data, null, 4),
+          (err) => {
+            if (err) {
+              console.log('error', err);
+            } else {
+              resolve(true);
+            }
+          }
+        );
+      }
+    });
+  }
+
   public async saveEarningsCallTranscriptsToTextFile(symbol: string, transcript: EarningsCallTranscript) {
     const fileName = symbol.toLowerCase() + '-q' + transcript.quarter + '-' + transcript.year + '-transcript.txt';
     //const text = jsonToPlainText(transcript.content, options);
-    const text = transcript.content
+    const text = transcript.content;
 
     return new Promise(function (resolve, reject) {
       if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_TRANSCRIPTS + '\\')) {

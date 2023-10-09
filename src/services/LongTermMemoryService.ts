@@ -36,6 +36,17 @@ export default class LongTermMemoryService {
     await this.chroma.deleteCollection({ name: VectorStoreName });
   }
 
+  async addFinancialDataToLongTermMemory(texts: any): Promise<void> {
+    // Create vector store and index the docs
+    await Chroma.fromTexts(texts, [], new OpenAIEmbeddings(), {
+      collectionName: VectorStoreName,
+      url: 'http://localhost:8001',
+      collectionMetadata: {
+        'hnsw:space': 'cosine',
+      },
+    });
+  }
+
   async addDocumentsToLongTermMemory(): Promise<void> {
     // Create vector store and index the docs
     await Chroma.fromDocuments(await this.getAllDocuments(), new OpenAIEmbeddings(), {
@@ -58,9 +69,9 @@ export default class LongTermMemoryService {
     });
 
     const documents = await vectorStore.similaritySearch(prompt, nResults);
-    documents.forEach(doc => {
+    documents.forEach((doc) => {
       //console.log(JSON.stringify(doc))
-    })
+    });
     return documents
       .map((doc) => doc.pageContent)
       .join(', ')

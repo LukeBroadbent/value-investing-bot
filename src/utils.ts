@@ -41,33 +41,7 @@ export function splitStringByCharacterLimitAndFullStop(inputString: string, char
   return substrings;
 }
 
-// export async function getImportantExcertsFromFinancialReport(json: JSON) {
-
-//   var texts: string[] = []
-
-//   // const callbacks = {
-//   //     processValue: (value:string) => { 
-//   //         if (value != null && value != undefined && value.length > 500) {
-//   //             texts.push(value)
-//   //         }
-//   //     }
-//   // };
- 
-//   var texts = traverseObject(json)
-//   texts.forEach(text => {
-//     console.log(text + "\n\n")
-//   })
-
-//   // texts.forEach(text => {
-//   //   console.log(text)
-//   // })
-//   // console.log(texts.length)
-
-//   return texts
-// }
-
 export async function getImportantExcertsFromFinancialReport(json: JSON) {
-
   const excerts: string[] = [];
 
   function traverse(obj: any) {
@@ -85,6 +59,22 @@ export async function getImportantExcertsFromFinancialReport(json: JSON) {
   }
 
   traverse(json);
+  return excerts;
+}
 
-  return excerts
+export function getKeyValuePairsFromFinancialData(json: JSON) {
+  function traverseJSON(obj: any, result: any) {
+    for (const key in obj) {
+      if (typeof obj[key] === 'object' && obj[key] !== null) {
+        // If the value is an object, recursively traverse it
+        traverseJSON(obj[key], result);
+      } else {
+        // If it's not an object, add the key-value pair to the result list
+        result.push({ key, value: obj[key] });
+      }
+    }
+  }
+  const resultList: any[] = [];
+  traverseJSON(json, resultList);
+  return resultList;
 }

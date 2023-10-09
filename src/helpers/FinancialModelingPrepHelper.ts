@@ -12,27 +12,25 @@ const FMPService = FinancialModelingPrepService.getInstance();
 
 export async function getFinancialData(symbol: string) {
   console.log('Downloading Financial Data for ' + symbol + '...');
-  var financialData: Array<FinancialData> = []
+  var financialData: Array<FinancialData> = [];
 
   var annualIncomeStatements = await getAnnualIncomeStatements(symbol);
   var annualBalanceSheets = await getAnnualBalanceSheets(symbol);
   var annualCashFlows = await getAnnualCashFlowStatements(symbol);
   //var annualFinancialRatios = await getAnnualFinancialRatios(symbol);
-  var min = Math.min(annualBalanceSheets.length, annualCashFlows.length, annualIncomeStatements.length)
+  var min = Math.min(annualBalanceSheets.length, annualCashFlows.length, annualIncomeStatements.length);
 
   for (var i = 0; i < min; i++) {
-    var year: FinancialData = new FinancialData()
-    year.financial_year = annualIncomeStatements[i].calendarYear
-    //console.log(annualIncomeStatements[i].calendarYear + " - " + annualBalanceSheets[i].calendarYear  + " - " + annualCashFlows[i].calendarYear)
-    year.income_statement = annualIncomeStatements[i]
-    year.balance_sheet = annualBalanceSheets[i]
-    year.cash_flow = annualCashFlows[i]
+    var year: FinancialData = new FinancialData();
+    year.financial_year = annualIncomeStatements[i].calendarYear;
+    year.income_statement = annualIncomeStatements[i];
+    year.balance_sheet = annualBalanceSheets[i];
+    year.cash_flow = annualCashFlows[i];
     //year.ratios = annualFinancialRatios[i]
-    financialData.push(year)
+    financialData.push(year);
   }
 
-  return financialData
-
+  return financialData;
 }
 
 // Requests Earnings Call Transcripts from API for a given stock and stores reports as txt file
@@ -63,7 +61,6 @@ export async function getFinancialReports(symbol: string) {
   var financialReports: Array<FMPFinancialReport> = [];
 
   for (const date of financialReportDates) {
-
     // Annual Reports
     if (date.period === 'FY' && date.linkJson != null) {
       console.log('\t~ ' + date.date);

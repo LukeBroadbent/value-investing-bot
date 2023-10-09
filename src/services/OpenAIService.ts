@@ -133,55 +133,53 @@ export default class OpenAIService {
     return combinedSummaries;
   }
 
-
   async summarizeText(textList: string[]) {
-    console.log("Summarizing an entire text file line by line...")
+    console.log('Summarizing an entire text file line by line...');
 
-      var lineSummaries: string[] = []
+    var lineSummaries: string[] = [];
 
-      // Prompt Primer
-      var primer = "Can you provide a comprehensive summary of the given text?" +
-      " The summary should cover all the key points and main ideas presented in the original text," + 
-      " while also condensing the information into a concise and easy-to-understand format." + 
-      " Please ensure that the summary includes relevant details and examples that support the main ideas," + 
-      " while avoiding any unnecessary information or repetition." + 
-      " The length of the summary should be appropriate for the length and complexity of the original text," + 
-      " providing a clear and accurate overview without omitting any important information."
+    // Prompt Primer
+    var primer =
+      'Can you provide a comprehensive summary of the given text?' +
+      ' The summary should cover all the key points and main ideas presented in the original text,' +
+      ' while also condensing the information into a concise and easy-to-understand format.' +
+      ' Please ensure that the summary includes relevant details and examples that support the main ideas,' +
+      ' while avoiding any unnecessary information or repetition.' +
+      ' The length of the summary should be appropriate for the length and complexity of the original text,' +
+      ' providing a clear and accurate overview without omitting any important information.';
 
-      var primed = await this.queryOpenAI(primer)
-      //console.log("GPT has been primed: " + primed)
-      
-      var maxCharactors = 15000
+    var primed = await this.queryOpenAI(primer);
+    //console.log("GPT has been primed: " + primed)
 
-      for(var i = 0; i < textList.length; i++) {
+    var maxCharactors = 15000;
 
-        if (textList[i].length > maxCharactors) {
+    for (var i = 0; i < textList.length; i++) {
+      if (textList[i].length > maxCharactors) {
+        var splitPrimer =
+          'Before you create your summary you need to accept two inputs. Once the 2nd input is accepted, Do your thing';
+        var splitPrimed = await this.queryOpenAI(splitPrimer);
 
-          var splitPrimer = "Before you create your summary you need to accept two inputs. Once the 2nd input is accepted, Do your thing"
-          var splitPrimed = await this.queryOpenAI(splitPrimer)
+        var splitSummaries: string[] = [];
+        var stringChunks = splitStringByCharacterLimitAndFullStop(textList[i], maxCharactors);
 
-          var splitSummaries: string[] = []
-          var stringChunks = splitStringByCharacterLimitAndFullStop(textList[i], maxCharactors)
-
-          for(var x = 0; x < stringChunks.length; x++) {
-            const response = await this.queryOpenAI(stringChunks[x])
-            splitSummaries.push(response.text)
-          }
-
-          var combinedSummaries = ""
-          splitSummaries.forEach(split => {
-            combinedSummaries = combinedSummaries + split + "\n"
-          })
-
-          lineSummaries.push(combinedSummaries)
-
-        } else {
-          const response = await this.queryOpenAI(textList[i])
-          console.log("line " + i + " completed");
-          lineSummaries.push(response.text)
+        for (var x = 0; x < stringChunks.length; x++) {
+          const response = await this.queryOpenAI(stringChunks[x]);
+          splitSummaries.push(response.text);
         }
-      } 
 
-      return lineSummaries
+        var combinedSummaries = '';
+        splitSummaries.forEach((split) => {
+          combinedSummaries = combinedSummaries + split + '\n';
+        });
+
+        lineSummaries.push(combinedSummaries);
+      } else {
+        const response = await this.queryOpenAI(textList[i]);
+        console.log('line ' + i + ' completed');
+        lineSummaries.push(response.text);
+      }
+    }
+
+    return lineSummaries;
   }
 }
