@@ -1,12 +1,5 @@
 class IncomeStatement {
-    "date": string
-    "symbol": string
-    "reportedCurrency": string
-    "cik": string
-    "fillingDate": string
-    "acceptedDate": string
     "calendarYear": string
-    "period": string
     "revenue": number
     "costOfRevenue": number
     "grossProfit": number

@@ -1,12 +1,5 @@
 class BalanceSheet {
-    "date": string
-    "symbol": string
-    "reportedCurrency": string
-    "cik": string
-    "fillingDate": string
-    "acceptedDate": string
     "calendarYear": string
-    "period": string
     "cashAndCashEquivalents": number
     "shortTermInvestments": number
     "cashAndShortTermInvestments": number
@@ -51,8 +44,6 @@ class BalanceSheet {
     "totalInvestments": number
     "totalDebt": number
     "netDebt": number
-    "link": string
-    "finalLink": string
 }
 
 export default BalanceSheet

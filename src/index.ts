@@ -75,7 +75,7 @@ const chain = new LLMChain({
 // Set up CLI commands
 const commandHandler: CommandHandler = createCommandHandler();
 
-// LongTermMemoryService.getInstance().deleteCollection()
+//LongTermMemoryService.getInstance().deleteCollection()
 //LongTermMemoryService.getInstance().addDocumentsToLongTermMemory()
 
 while (true) {

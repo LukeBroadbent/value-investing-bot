@@ -26,21 +26,19 @@ const financialReportsCommand = createCommand(
 
     for (const report of reports) {
         
-        // Gather Important Text from financial report
-        //var excerts = await getImportantExcertsFromFinancialReport(report.json);
-        //console.log(JSON.stringify(excerts))
+        //Gather Important Text from financial report
+        var excerts = await getImportantExcertsFromFinancialReport(report.json);
+        console.log(excerts.length)
 
-        // // Summarizes all excerts from a financial report to be written to file
-        // var excertSummaries = await OpenAIService.getInstance().summarizeFinancialReport(excerts);
+        // Summarizes all excerts from a financial report to be written to file
+        var excertSummaries = await OpenAIService.getInstance().summarizeText(excerts);
 
         // Write Summarized Financial Reports to File
         var write = await FileReadWriteService.getInstance().saveFinancialReport(
             report.symbol,
             symbol + '-' + report.year + '-' + report.period,
-            report.json
+            excertSummaries
         );
-
-        break
     }
   }
 );

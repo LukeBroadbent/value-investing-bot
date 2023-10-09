@@ -41,20 +41,50 @@ export function splitStringByCharacterLimitAndFullStop(inputString: string, char
   return substrings;
 }
 
+// export async function getImportantExcertsFromFinancialReport(json: JSON) {
+
+//   var texts: string[] = []
+
+//   // const callbacks = {
+//   //     processValue: (value:string) => { 
+//   //         if (value != null && value != undefined && value.length > 500) {
+//   //             texts.push(value)
+//   //         }
+//   //     }
+//   // };
+ 
+//   var texts = traverseObject(json)
+//   texts.forEach(text => {
+//     console.log(text + "\n\n")
+//   })
+
+//   // texts.forEach(text => {
+//   //   console.log(text)
+//   // })
+//   // console.log(texts.length)
+
+//   return texts
+// }
+
 export async function getImportantExcertsFromFinancialReport(json: JSON) {
 
-  var texts: string[] = []
+  const excerts: string[] = [];
 
-  const callbacks = {
-      processValue: (value:string) => { 
-          if (value != null && value != undefined && value.length > 500) {
-              texts.push(value)
-          }
+  function traverse(obj: any) {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const value = obj[key];
+        if (typeof value === 'string' && value.length > 500) {
+          excerts.push(value);
+        }
+        if (typeof value === 'object' && value !== null) {
+          traverse(value); // Recursively traverse nested objects
+        }
       }
-  };
-  
-  const jt = require('');
-  await jt.traverse(json, callbacks);
+    }
+  }
 
-  return texts
+  traverse(json);
+
+  return excerts
 }

@@ -1,12 +1,5 @@
 class CashFlows {
-    "date": string
-    "symbol": string
-    "reportedCurrency": string
-    "cik": string
-    "fillingDate": string
-    "acceptedDate": string
     "calendarYear": string
-    "period": string
     "netIncome": number
     "depreciationAndAmortization": number
     "deferredIncomeTax": number
@@ -37,8 +30,6 @@ class CashFlows {
     "operatingCashFlow": number
     "capitalExpenditure": number
     "freeCashFlow": number
-    "link": string
-    "finalLink": string
 }
 
 export default CashFlows

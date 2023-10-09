@@ -17,17 +17,18 @@ export async function getFinancialData(symbol: string) {
   var annualIncomeStatements = await getAnnualIncomeStatements(symbol);
   var annualBalanceSheets = await getAnnualBalanceSheets(symbol);
   var annualCashFlows = await getAnnualCashFlowStatements(symbol);
-  var annualFinancialRatios = await getAnnualFinancialRatios(symbol);
+  //var annualFinancialRatios = await getAnnualFinancialRatios(symbol);
+  var min = Math.min(annualBalanceSheets.length, annualCashFlows.length, annualIncomeStatements.length)
 
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < min; i++) {
     var year: FinancialData = new FinancialData()
     year.financial_year = annualIncomeStatements[i].calendarYear
+    //console.log(annualIncomeStatements[i].calendarYear + " - " + annualBalanceSheets[i].calendarYear  + " - " + annualCashFlows[i].calendarYear)
     year.income_statement = annualIncomeStatements[i]
     year.balance_sheet = annualBalanceSheets[i]
     year.cash_flow = annualCashFlows[i]
-    year.ratios = annualFinancialRatios[i]
+    //year.ratios = annualFinancialRatios[i]
     financialData.push(year)
-    console.log(JSON.stringify(year))
   }
 
   return financialData
@@ -72,12 +73,12 @@ export async function getFinancialReports(symbol: string) {
     }
 
     // Quartetly Reports
-    if (date.period.includes('Q') && date.linkJson != null) {
-      console.log('\t~ ' + date.date + ' - ' + date.period);
-      var reportData = await FMPService.getFinancialReport(date.linkJson);
-      var fmpFinanicalReport = new FMPFinancialReport(date.symbol, date.period, date.date, reportData as JSON);
-      financialReports.push(fmpFinanicalReport);
-    }
+    // if (date.period.includes('Q') && date.linkJson != null) {
+    //   console.log('\t~ ' + date.date + ' - ' + date.period);
+    //   var reportData = await FMPService.getFinancialReport(date.linkJson);
+    //   var fmpFinanicalReport = new FMPFinancialReport(date.symbol, date.period, date.date, reportData as JSON);
+    //   financialReports.push(fmpFinanicalReport);
+    // }
   }
   return financialReports;
 }

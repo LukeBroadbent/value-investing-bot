@@ -50,7 +50,7 @@ export default class LongTermMemoryService {
   }
 
   async queryLongTermMemory(prompt: string) {
-    var nResults = 20;
+    var nResults = 10;
 
     const vectorStore = await Chroma.fromExistingCollection(new OpenAIEmbeddings(), {
       collectionName: VectorStoreName,
@@ -59,7 +59,7 @@ export default class LongTermMemoryService {
 
     const documents = await vectorStore.similaritySearch(prompt, nResults);
     documents.forEach(doc => {
-      console.log(JSON.stringify(doc))
+      //console.log(JSON.stringify(doc))
     })
     return documents
       .map((doc) => doc.pageContent)

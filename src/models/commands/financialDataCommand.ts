@@ -24,6 +24,7 @@ const financialDataCommand = createCommand(
 
     // calls API to download data
     var yearlyData: Array<FinancialData> = await getFinancialData(symbol);
+
     
     for (const year of yearlyData) {
       // Write Yearly Financials to File

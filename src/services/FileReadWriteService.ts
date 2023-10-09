@@ -151,7 +151,7 @@ export default class FileReadWriteService {
 
     return new Promise(function (resolve, reject) {
       if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + '\\')) {
-        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + fileName, JSON.stringify(data), (err) => {
+        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + fileName, JSON.stringify(data, null, 4), (err) => {
           if (err) {
             console.log('error', err);
           } else {
@@ -160,7 +160,7 @@ export default class FileReadWriteService {
         });
       } else {
         fs.mkdirSync(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + '\\', { recursive: true });
-        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + '\\' + fileName, JSON.stringify(data), (err) => {
+        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_FINANCIALS + '\\' + fileName, JSON.stringify(data, null, 4), (err) => {
           if (err) {
             console.log('error', err);
           } else {
@@ -173,7 +173,8 @@ export default class FileReadWriteService {
 
   public async saveEarningsCallTranscriptsToTextFile(symbol: string, transcript: EarningsCallTranscript) {
     const fileName = symbol.toLowerCase() + '-q' + transcript.quarter + '-' + transcript.year + '-transcript.txt';
-    const text = jsonToPlainText(transcript.content, options);
+    //const text = jsonToPlainText(transcript.content, options);
+    const text = transcript.content
 
     return new Promise(function (resolve, reject) {
       if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_TRANSCRIPTS + '\\')) {
