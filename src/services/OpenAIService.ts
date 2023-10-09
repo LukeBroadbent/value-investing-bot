@@ -149,9 +149,6 @@ export default class OpenAIService {
       ' providing a clear and accurate overview without omitting any important information.';
 
     var primed = await this.queryOpenAI(primer);
-    //console.log("GPT has been primed: " + primed)
-
-    var maxCharactors = 15000;
 
     for (var i = 0; i < textList.length; i++) {
       if (textList[i].length > maxCharactors) {
@@ -175,7 +172,6 @@ export default class OpenAIService {
         lineSummaries.push(combinedSummaries);
       } else {
         const response = await this.queryOpenAI(textList[i]);
-        console.log('line ' + i + ' completed');
         lineSummaries.push(response.text);
       }
     }

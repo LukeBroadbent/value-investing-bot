@@ -6,7 +6,6 @@ import { getKeyValuePairsFromFinancialData } from '../../utils.js';
 import FinancialData from '../financialModelingPrep/FinancialData.js';
 import LongTermMemoryService from '../../services/LongTermMemoryService.js';
 
-
 const financialDataCommand = createCommand(
   'financial-data',
   ['financials', 'financial'],
@@ -38,10 +37,8 @@ const financialDataCommand = createCommand(
       });
 
       // Embed and Write to Chroma DB
-      await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed)
-
+      await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
     }
-
   }
 );
 
