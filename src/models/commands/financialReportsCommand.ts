@@ -3,7 +3,7 @@ import createCommand from './command.js';
 import { getFinancialReports } from '../../helpers/FinancialModelingPrepHelper.js';
 import OpenAIService from '../../services/OpenAIService.js';
 import FileReadWriteService from '../../services/FileReadWriteService.js';
-import FMPFinancialReport from '../financialModelingPrep/FMPFinancialReport.js';
+import FinancialReport from '../financialModelingPrep/FinancialReport.js';
 import { getImportantExcertsFromFinancialReport } from '../../utils.js';
 
 const financialReportsCommand = createCommand(
@@ -22,7 +22,7 @@ const financialReportsCommand = createCommand(
     var symbol = args[0].toUpperCase();
 
     // calls API to download data
-    var reports: Array<FMPFinancialReport> = await getFinancialReports(symbol);
+    var reports: Array<FinancialReport> = await getFinancialReports(symbol);
 
     for (const report of reports) {
       //Gather Important Text from financial report

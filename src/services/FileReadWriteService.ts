@@ -25,7 +25,7 @@ export default class FileReadWriteService {
 
   constructor() {
     if (FileReadWriteService._instance) {
-      throw new Error('Error: Instantiation failed: Use FMPStockToJSONFileService.getInstance() instead of new.');
+      throw new Error('Error: Instantiation failed: Use FileReadWriteService.getInstance() instead of new.');
     }
     FileReadWriteService._instance = this;
   }
@@ -34,87 +34,8 @@ export default class FileReadWriteService {
     return FileReadWriteService._instance;
   }
 
-  // Ticker File
-  // public hasStockListBeenRetrieved() {
-  //   if(fs.existsSync(FILEPATH_TICKERS)) {
-  //     return true
-  //   }
-  //   return false
-  // }
-
-  // public async saveTickerDataToFile(data: string) {
-  //   return new Promise(function (resolve, reject) {
-  //       fs.writeFile(FILEPATH_TICKERS, data, function(err, result) {
-  //         if(err) { console.log('error', err); } else { resolve(true) }
-  //       });
-  //   })
-  // }
-
-  // public readTickerDataFromFile() {
-  //   var jsonString = fs.readFileSync(FILEPATH_TICKERS, 'utf-8');
-  //   return jsonString
-  // }
-
-  // // Stock Data File
-  // public hasStockDataBeenRetrieved(symbol: string) {
-  //   if (fs.existsSync(FILEPATH_STOCKS + symbol + ".json")) {
-  //     return true
-  //   }
-  //   return false
-  // }
-
-  // public async saveStockDataToFile(symbol: string, data: string) {
-  //   return new Promise(function (resolve, reject) {
-  //     if (fs.existsSync(FILEPATH_STOCKS)) {
-  //       fs.writeFile(FILEPATH_STOCKS + symbol + ".json", data, function(err, result) {
-  //         if(err) { console.log('error', err); } else { resolve(true) }
-  //       });
-  //     } else {
-  //       fs.mkdirSync(FILEPATH_STOCKS, { recursive: true });
-  //       fs.writeFile(FILEPATH_STOCKS + symbol + ".json", data, function(err, result) {
-  //             if(err) { console.log('error', err); } else { resolve(true) }
-  //         });
-  //     }
-  //   })
-  // }
-
-  // public readStockDataFromFile(symbol: string) {
-  //     var jsonString = fs.readFileSync(FILEPATH_STOCKS + symbol + ".json", 'utf-8');
-  //     return jsonString
-  // }
-
-  // // Financial Report Files
-  // public hasFinancialReportsBeenDownloaded(symbol: string) {
-  //   if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + "\\")) {
-  //     return true
-  //   }
-  //   return false
-  // }
-
-  // public async saveReportDataToJSONFile(symbol: string, fileName: string, data: any) {
-
-  //   // Convert JSON to Plaintext
-  //   const text = jsonToPlainText(data, options);
-
-  //   return new Promise(function (resolve, reject) {
-  //     if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + "\\")) {
-  //       fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + fileName + ".json", text, function(err, result) {
-  //         if(err) { console.log('error', err); } else { resolve(true) }
-  //       });
-  //     } else {
-  //       fs.mkdirSync(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + "\\", { recursive: true });
-  //       fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + "\\" + fileName + ".json", text, function(err, result) {
-  //         if(err) { console.log('error', err); } else { resolve(true) }
-  //       });
-  //     }
-  //   })
-
-  // }
-
   public async saveFinancialReport(symbol: string, fileName: string, data: any) {
-    // Convert JSON to Plaintext
 
-    // Creates Format for Report Output
     var text = '';
     for (var i = 0; i < data.length; i++) {
       text = text + data[i];
@@ -251,23 +172,4 @@ export default class FileReadWriteService {
       }
     });
   }
-
-  //   public async saveBusinessOverviewToTextFile(fileName: string, data: any) {
-
-  //     // Convert JSON to Plaintext
-  //     const text = jsonToPlainText(data, options);
-
-  //     return new Promise(function (resolve, reject) {
-  //   if (fs.existsSync(FILEPATH_BUSINESS_REPORT + "\\")) {
-  //     fs.writeFile(FILEPATH_BUSINESS_REPORT + fileName + ".txt", text, function(err, result) {
-  //       if(err) { console.log('error', err); } else { resolve(true) }
-  //     });
-  //   } else {
-  //     fs.mkdirSync(FILEPATH_BUSINESS_REPORT + "\\", { recursive: true });
-  //     fs.writeFile(FILEPATH_BUSINESS_REPORT + "\\" + fileName + ".txt", text, function(err, result) {
-  //       if(err) { console.log('error', err); } else { resolve(true) }
-  //     });
-  //   }
-  //     })
-  // }
 }

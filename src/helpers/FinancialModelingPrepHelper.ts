@@ -1,8 +1,8 @@
 import BalanceSheet from '../models/financialModelingPrep/BalanceSheet.js';
 import CashFlows from '../models/financialModelingPrep/CashFlow.js';
 import EarningsCallTranscript from '../models/financialModelingPrep/EarningsCallTranscript.js';
-import FMPFinancialReport from '../models/financialModelingPrep/FMPFinancialReport.js';
-import FMPFinancialReportDate from '../models/financialModelingPrep/FMPFinancialReportDate.js';
+import FinancialReport from '../models/financialModelingPrep/FinancialReport.js';
+import FinancialReportDate from '../models/financialModelingPrep/FinancialReportDate.js';
 import FinancialData from '../models/financialModelingPrep/FinancialData.js';
 import IncomeStatement from '../models/financialModelingPrep/IncomeStatement.js';
 import NewsStory from '../models/financialModelingPrep/NewsStory.js';
@@ -48,8 +48,8 @@ export async function getEarningCallTranscriptsList(symbol: string) {
     var year = value[1];
 
     var transcript = await FMPService.getEarningsCallTranscripts(symbol, qtr, year);
-    var fmpEarningsCallTranscript = JSON.parse(JSON.stringify(transcript).slice(1, -1)) as EarningsCallTranscript;
-    transcripts.push(fmpEarningsCallTranscript);
+    var earningsCallTranscript = JSON.parse(JSON.stringify(transcript).slice(1, -1)) as EarningsCallTranscript;
+    transcripts.push(earningsCallTranscript);
   }
 
   return transcripts;
@@ -58,39 +58,40 @@ export async function getEarningCallTranscriptsList(symbol: string) {
 // Requests Financial Reports from API for a given stock and stores reports as txt files
 export async function getFinancialReports(symbol: string) {
   console.log('Downloading Financial Reports for ' + symbol + '...');
-  var financialReportDates: Array<FMPFinancialReportDate> = await getFinancialReportDates(symbol);
+  var financialReportDates: Array<FinancialReportDate> = await getFinancialReportDates(symbol);
 
   // Download Report JSON
-  var financialReports: Array<FMPFinancialReport> = [];
+  
+  var financialReports: Array<FinancialReport> = [];
 
   for (const date of financialReportDates) {
     // Annual Reports
     if (date.period === 'FY' && date.linkJson != null) {
       console.log('\t~ ' + date.date);
       var reportData = await FMPService.getFinancialReport(date.linkJson);
-      var fmpFinanicalReport = new FMPFinancialReport(date.symbol, date.period, date.date, reportData as JSON);
-      financialReports.push(fmpFinanicalReport);
+      var finanicalReport = new FinancialReport(date.symbol, date.period, date.date, reportData as JSON);
+      financialReports.push(finanicalReport);
     }
 
     // Quartetly Reports
     if (date.period.includes('Q') && date.linkJson != null) {
       console.log('\t~ ' + date.date + ' - ' + date.period);
       var reportData = await FMPService.getFinancialReport(date.linkJson);
-      var fmpFinanicalReport = new FMPFinancialReport(date.symbol, date.period, date.date, reportData as JSON);
-      financialReports.push(fmpFinanicalReport);
+      var finanicalReport = new FinancialReport(date.symbol, date.period, date.date, reportData as JSON);
+      financialReports.push(finanicalReport);
     }
   }
   return financialReports;
 }
 
 async function getFinancialReportDates(symbol: string) {
-  var financialReportDates: Array<FMPFinancialReportDate> = [];
+  var financialReportDates: Array<FinancialReportDate> = [];
   var dates = await FMPService.getFinancialReportDates(symbol);
 
   Object.entries(dates as string).forEach((report) => {
     var [key, value] = report;
-    var fmpFinancialReportDate = JSON.parse(JSON.stringify(value)) as FMPFinancialReportDate;
-    financialReportDates.push(fmpFinancialReportDate);
+    var financialReportDate = JSON.parse(JSON.stringify(value)) as FinancialReportDate;
+    financialReportDates.push(financialReportDate);
   });
 
   return financialReportDates;
@@ -103,8 +104,8 @@ export async function getNewsStories(symbol: string) {
   var newsStoriesData = await FMPService.getNewsStories(symbol);
   for (const newsStory of Object.entries(newsStoriesData as string)) {
     var [key, value] = newsStory;
-    var fmpNewsStory = JSON.parse(JSON.stringify(value)) as NewsStory;
-    newsStories.push(fmpNewsStory);
+    var newsStory = JSON.parse(JSON.stringify(value)) as NewsStory;
+    newsStories.push(newsStory);
 
     // Below is for testing. to only grab 10 articles
     if (key === '10') {
@@ -132,8 +133,8 @@ async function getAnnualIncomeStatements(stock: string) {
   var incomeStatements = await FMPService.getIncomeStatements(stock, true);
   Object.entries(incomeStatements as string).forEach((statement) => {
     var [key, value] = statement;
-    var fmpIncomeStatement = JSON.parse(JSON.stringify(value)) as IncomeStatement;
-    annualIncomeStatements.push(fmpIncomeStatement);
+    var incomeStatement = JSON.parse(JSON.stringify(value)) as IncomeStatement;
+    annualIncomeStatements.push(incomeStatement);
   });
   return annualIncomeStatements;
 }
@@ -143,8 +144,8 @@ async function getAnnualBalanceSheets(stock: string) {
   var balance = await FMPService.getBalanceSheets(stock, true);
   Object.entries(balance as string).forEach((statement) => {
     var [key, value] = statement;
-    var fmpBalanceSheet = JSON.parse(JSON.stringify(value)) as BalanceSheet;
-    annualBalanceSheets.push(fmpBalanceSheet);
+    var balanceSheet = JSON.parse(JSON.stringify(value)) as BalanceSheet;
+    annualBalanceSheets.push(balanceSheet);
   });
   return annualBalanceSheets;
 }
@@ -154,8 +155,8 @@ async function getAnnualCashFlowStatements(stock: string) {
   var cash = await FMPService.getCashFlows(stock, true);
   Object.entries(cash as string).forEach((statement) => {
     var [key, value] = statement;
-    var fmpCashFlow = JSON.parse(JSON.stringify(value)) as CashFlows;
-    annualCashFlows.push(fmpCashFlow);
+    var cashFlow = JSON.parse(JSON.stringify(value)) as CashFlows;
+    annualCashFlows.push(cashFlow);
   });
   return annualCashFlows;
 }
@@ -165,8 +166,8 @@ async function getAnnualFinancialRatios(stock: string) {
   var ratios = await FMPService.getFinancialRatios(stock, true);
   Object.entries(ratios as string).forEach((statement) => {
     var [key, value] = statement;
-    var fmpFinancialRatio = JSON.parse(JSON.stringify(value)) as Ratios;
-    annualFinancialRatios.push(fmpFinancialRatio);
+    var financialRatio = JSON.parse(JSON.stringify(value)) as Ratios;
+    annualFinancialRatios.push(financialRatio);
   });
   return annualFinancialRatios;
 }

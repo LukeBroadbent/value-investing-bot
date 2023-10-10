@@ -1,4 +1,4 @@
-class FMPFinancialReport {
+class FinancialReport {
   symbol: string;
   period: string;
   year: string;
@@ -12,4 +12,4 @@ class FMPFinancialReport {
   }
 }
 
-export default FMPFinancialReport;
+export default FinancialReport;

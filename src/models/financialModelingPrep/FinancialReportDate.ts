@@ -1,4 +1,4 @@
-class FMPFinancialReportDate {
+class FinancialReportDate {
   'symbol': string;
   'date': string;
   'period': string;
@@ -6,4 +6,4 @@ class FMPFinancialReportDate {
   'linkJson': string;
 }
 
-export default FMPFinancialReportDate;
+export default FinancialReportDate;
