@@ -30,7 +30,7 @@ const financialReportsCommand = createCommand(
       console.log(excerts.length);
 
       // Summarizes all excerts from a financial report to be written to file
-      var excertSummaries = await OpenAIService.getInstance().summarizeText(excerts);
+      var excertSummaries = await OpenAIService.getInstance().summarizeTextList(excerts);
 
       // Write Summarized Financial Reports to File
       var write = await FileReadWriteService.getInstance().saveFinancialReport(
@@ -38,6 +38,8 @@ const financialReportsCommand = createCommand(
         symbol + '-' + report.year + '-' + report.period,
         excertSummaries
       );
+
+      break;
     }
   }
 );

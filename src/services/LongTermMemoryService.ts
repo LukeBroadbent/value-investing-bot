@@ -48,8 +48,18 @@ export default class LongTermMemoryService {
   }
 
   async addDocumentsToLongTermMemory(): Promise<void> {
+    var documentsLocation = './docs/';
+
+    // Initialize the document loader with supported file formats
+    const loader = new DirectoryLoader(documentsLocation, {
+      '.json': (path) => new JSONLoader(path),
+      '.txt': (path) => new TextLoader(path),
+    });
+
+    const docs = await loader.loadAndSplit(new RecursiveCharacterTextSplitter());
+
     // Create vector store and index the docs
-    await Chroma.fromDocuments(await this.getAllDocuments(), new OpenAIEmbeddings(), {
+    await Chroma.fromDocuments(docs, new OpenAIEmbeddings(), {
       collectionName: VectorStoreName,
       url: 'http://localhost:8001',
       collectionMetadata: {
@@ -58,6 +68,31 @@ export default class LongTermMemoryService {
     });
 
     console.log('Finished Adding Docs to Long Term Memory');
+  }
+
+  async addTranscriptsToLongTermMemory(symbol: string): Promise<void> {
+    var documentsLocation = './company/' + symbol + '/transcripts/';
+
+    // Initialize the document loader with supported file formats
+    const loader = new DirectoryLoader(documentsLocation, {
+      '.json': (path) => new JSONLoader(path),
+      '.txt': (path) => new TextLoader(path),
+    });
+
+    const docs = await loader.loadAndSplit(new RecursiveCharacterTextSplitter());
+    console.log(symbol + ' transcripts gathered');
+    console.log('length: ' + docs.length);
+
+    // Create vector store and index the docs
+    await Chroma.fromDocuments(docs, new OpenAIEmbeddings(), {
+      collectionName: VectorStoreName,
+      url: 'http://localhost:8001',
+      collectionMetadata: {
+        'hnsw:space': 'cosine',
+      },
+    });
+
+    console.log('Finished adding ' + symbol + ' Transcripts to Long Term Memory');
   }
 
   async queryLongTermMemory(prompt: string) {
@@ -77,20 +112,5 @@ export default class LongTermMemoryService {
       .join(', ')
       .trim()
       .replaceAll('\n', ' ');
-  }
-
-  private async getAllDocuments() {
-    var documentsLocation = './docs/';
-
-    // Initialize the document loader with supported file formats
-    const loader = new DirectoryLoader(documentsLocation, {
-      '.json': (path) => new JSONLoader(path),
-      '.txt': (path) => new TextLoader(path),
-    });
-
-    const docs = await loader.loadAndSplit(new RecursiveCharacterTextSplitter());
-    console.log('Docs loaded.');
-
-    return docs;
   }
 }

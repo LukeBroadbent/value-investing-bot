@@ -3,6 +3,7 @@ import helpCommand from './models/commands/helpCommand.js';
 import earningsCallTranscriptCommand from './models/commands/earningsCallTranscriptCommand.js';
 import financialReportsCommand from './models/commands/financialReportsCommand.js';
 import financialDataCommand from './models/commands/financialDataCommand.js';
+import newsStoriesCommand from './models/commands/newsStoriesCommand.js';
 //import changeContextStoreCommand from './commands/switchContextStoreCommand.js';
 
 function createCommandHandler(): CommandHandler {
@@ -11,6 +12,7 @@ function createCommandHandler(): CommandHandler {
     earningsCallTranscriptCommand,
     financialReportsCommand,
     financialDataCommand,
+    newsStoriesCommand,
   ];
 
   function getCommands() {

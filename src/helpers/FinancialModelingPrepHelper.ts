@@ -5,8 +5,11 @@ import FMPFinancialReport from '../models/financialModelingPrep/FMPFinancialRepo
 import FMPFinancialReportDate from '../models/financialModelingPrep/FMPFinancialReportDate.js';
 import FinancialData from '../models/financialModelingPrep/FinancialData.js';
 import IncomeStatement from '../models/financialModelingPrep/IncomeStatement.js';
+import NewsStory from '../models/financialModelingPrep/NewsStory.js';
 import Ratios from '../models/financialModelingPrep/Ratios.js';
 import FinancialModelingPrepService from '../services/FinancialModelingPrepService.js';
+import WebScraperService from '../services/WebScraperService.js';
+import { isFilteredNewsStory } from '../utils.js';
 
 const FMPService = FinancialModelingPrepService.getInstance();
 
@@ -17,7 +20,7 @@ export async function getFinancialData(symbol: string) {
   var annualIncomeStatements = await getAnnualIncomeStatements(symbol);
   var annualBalanceSheets = await getAnnualBalanceSheets(symbol);
   var annualCashFlows = await getAnnualCashFlowStatements(symbol);
-  //var annualFinancialRatios = await getAnnualFinancialRatios(symbol);
+  var annualFinancialRatios = await getAnnualFinancialRatios(symbol);
   var min = Math.min(annualBalanceSheets.length, annualCashFlows.length, annualIncomeStatements.length);
 
   for (var i = 0; i < min; i++) {
@@ -26,7 +29,7 @@ export async function getFinancialData(symbol: string) {
     year.income_statement = annualIncomeStatements[i];
     year.balance_sheet = annualBalanceSheets[i];
     year.cash_flow = annualCashFlows[i];
-    //year.ratios = annualFinancialRatios[i]
+    year.ratios = annualFinancialRatios[i];
     financialData.push(year);
   }
 
@@ -70,12 +73,12 @@ export async function getFinancialReports(symbol: string) {
     }
 
     // Quartetly Reports
-    // if (date.period.includes('Q') && date.linkJson != null) {
-    //   console.log('\t~ ' + date.date + ' - ' + date.period);
-    //   var reportData = await FMPService.getFinancialReport(date.linkJson);
-    //   var fmpFinanicalReport = new FMPFinancialReport(date.symbol, date.period, date.date, reportData as JSON);
-    //   financialReports.push(fmpFinanicalReport);
-    // }
+    if (date.period.includes('Q') && date.linkJson != null) {
+      console.log('\t~ ' + date.date + ' - ' + date.period);
+      var reportData = await FMPService.getFinancialReport(date.linkJson);
+      var fmpFinanicalReport = new FMPFinancialReport(date.symbol, date.period, date.date, reportData as JSON);
+      financialReports.push(fmpFinanicalReport);
+    }
   }
   return financialReports;
 }
@@ -93,61 +96,23 @@ async function getFinancialReportDates(symbol: string) {
   return financialReportDates;
 }
 
-// Request Data from API and Creates an FMPStock Object that contains all data requested
-// export async function getStock(stock: string) {
-//   console.log('Gathering ' + stock + ' data...');
-//   var fmpStock: FMPStock = new FMPStock();
+// Requests News Stories from API for a given stock, Pushes it through Open AI for format and write to a file
+export async function getNewsStories(symbol: string) {
+  console.log('Downloading News Stories for ' + symbol + '...');
+  var newsStories: Array<NewsStory> = [];
+  var newsStoriesData = await FMPService.getNewsStories(symbol);
+  for (const newsStory of Object.entries(newsStoriesData as string)) {
+    var [key, value] = newsStory;
+    var fmpNewsStory = JSON.parse(JSON.stringify(value)) as NewsStory;
+    newsStories.push(fmpNewsStory);
 
-//   if (!FileReadWriteService.getInstance().hasStockDataBeenRetrieved(stock)) {
-//     // Download Data to Create FMPStock Object
-//     fmpStock = (await downloadStockDataFromApi(stock)) as FMPStock;
-
-//     // Write Stock to File
-//     var write = await FileReadWriteService.getInstance().saveStockDataToFile(fmpStock.symbol, JSON.stringify(fmpStock));
-//   } else {
-//     var json = FileReadWriteService.getInstance().readStockDataFromFile(stock);
-//     fmpStock = Object.assign(new FMPStock(), JSON.parse(json));
-
-//     var updated = await gatherMissingFincancialData(fmpStock);
-
-//     // Check if new financial records have been added
-//     // var newReports = await isNewFinancialDataAvailable(fmpStock)
-//     // if (newReports) {
-//     //   // Download Full Stock Information again
-//     //   console.log("New Reports Found. Downloading data")
-//     //   fmpStock = await downloadStockDataFromApi(stock) as FMPStock
-
-//     //   // Write Stock to File
-//     //   await FileReadWriteService.getInstance().saveStockDataToFile(fmpStock.symbol, JSON.stringify(fmpStock))
-
-//     // }
-
-//     // Write Stock to File if new data was gathered
-//     if (updated) {
-//       await FileReadWriteService.getInstance().saveStockDataToFile(fmpStock.symbol, JSON.stringify(fmpStock));
-//     }
-//   }
-
-//   return fmpStock;
-// }
-
-// Request Data from API for a list of Stocks and returns a list of FMPStock objects
-// export async function getAllStockData(stocks: any) {
-//   var stockList: Array<FMPStock> = [];
-//   var counter = stocks.length;
-//   for (const stock of stocks) {
-//     counter--;
-//     await getStock(stock).then((fmpStock) => {
-//       if (fmpStock != undefined) {
-//         stockList.push(fmpStock as FMPStock);
-//       }
-//     });
-//   }
-//   // Failed Tickers - Remove them from Ticker
-//   StockTickerService.getInstance().updateTickerList();
-
-//   return stockList;
-// }
+    // Below is for testing. to only grab 10 articles
+    if (key === '10') {
+      break;
+    }
+  }
+  return newsStories;
+}
 
 // Requests Data from the API that will be used for building AI Data Model
 export async function getStockDataForAIDataModel(stock: string) {
@@ -160,90 +125,6 @@ export async function getStockDataForAIDataModel(stock: string) {
   // News Stories
   //await getNewsStories(stock);
 }
-
-// async function downloadStockDataFromApi(stock: string) {
-//   var fmpStock: FMPStock = new FMPStock();
-
-//   var quote = (await FMPService.getCompanyQuote(stock)) as string;
-//   if (quote.length == 0) {
-//     StockTickerService.getInstance().getFailedTickerList().push(stock);
-//     return;
-//   }
-//   fmpStock = Object.assign(new FMPStock(), JSON.parse(JSON.stringify(quote).replace('[', '').replace(']', '')));
-
-//   var profile = await FMPService.getCompanyProfile(stock);
-//   fmpStock.companyProfile = Object.assign(
-//     new FMPCompanyProfile(),
-//     JSON.parse(JSON.stringify(profile).replace('[', '').replace(']', ''))
-//   );
-
-//   fmpStock.annualIncomeStatements = await getAnnualIncomeStatements(stock);
-//   var reportDates: Array<String> = [];
-//   fmpStock.annualIncomeStatements.forEach((incomestatement) => {
-//     reportDates.push(incomestatement.date);
-//   });
-
-//   fmpStock.dailyCloses = await getDailyCloses(stock, reportDates);
-//   fmpStock.annualBalanceSheets = await getAnnualBalanceSheets(stock);
-//   fmpStock.annualCashFlows = await getAnnualCashFlowStatements(stock);
-//   fmpStock.annualFinancialRatios = await getAnnualFinancialRatios(stock);
-//   fmpStock.companyExecutives = await getCompanyExecutives(stock);
-//   fmpStock.companyPeers = await getCompanyPeerList(stock);
-//   fmpStock.financialReportDates = await getFinancialReportDates(stock);
-
-//   return fmpStock;
-// }
-
-// Function written to gather missing finacial data for a stock that was created during the development process
-// async function gatherMissingFincancialData(fmpStock: FMPStock) {
-//   var updated = false;
-
-//   if (fmpStock.companyProfile == undefined) {
-//     var profile = await FMPService.getCompanyProfile(fmpStock.symbol);
-//     fmpStock.companyProfile = Object.assign(
-//       new FMPCompanyProfile(),
-//       JSON.parse(JSON.stringify(profile).replace('[', '').replace(']', ''))
-//     );
-//     updated = true;
-//   }
-
-//   if (fmpStock.companyPeers == undefined) {
-//     var competitors = await getCompanyPeerList(fmpStock.symbol);
-//     fmpStock.companyPeers = competitors;
-//     updated = true;
-//   }
-
-//   if (fmpStock.annualFinancialRatios == undefined) {
-//     var ratios = await FMPService.getFinancialRatios(fmpStock.symbol, true);
-//     var annualFinancialRatios: Array<FMPFinancialRatio> = [];
-//     Object.entries(ratios as string).forEach((statement) => {
-//       var [key, value] = statement;
-//       var fmpFinancialRatio = JSON.parse(JSON.stringify(value)) as FMPFinancialRatio;
-//       annualFinancialRatios.push(fmpFinancialRatio);
-//     });
-//     fmpStock.annualFinancialRatios = annualFinancialRatios;
-//     updated = true;
-//   }
-
-//   if (fmpStock.companyExecutives == undefined) {
-//     var executivesList: Array<FMPExecutive> = [];
-//     var executives = await FMPService.getCompanyExecutives(fmpStock.symbol);
-//     Object.entries(executives as string).forEach((executive) => {
-//       var [key, value] = executive;
-//       var fmpExecutive = JSON.parse(JSON.stringify(value)) as FMPExecutive;
-//       executivesList.push(fmpExecutive);
-//     });
-//     fmpStock.companyExecutives = executivesList;
-//     updated = true;
-//   }
-
-//   if (fmpStock.financialReportDates == undefined) {
-//     fmpStock.financialReportDates = await getFinancialReportDates(fmpStock.symbol);
-//     updated = true;
-//   }
-
-//   return updated;
-// }
 
 // Requests Income Statements from API for a given stock
 async function getAnnualIncomeStatements(stock: string) {
@@ -289,123 +170,3 @@ async function getAnnualFinancialRatios(stock: string) {
   });
   return annualFinancialRatios;
 }
-
-// async function getCompanyExecutives(stock: string) {
-//   var executivesList: Array<FMPExecutive> = [];
-//   var executives = await FMPService.getCompanyExecutives(stock);
-//   Object.entries(executives as string).forEach((executive) => {
-//     var [key, value] = executive;
-//     var fmpExecutive = JSON.parse(JSON.stringify(value)) as FMPExecutive;
-//     executivesList.push(fmpExecutive);
-//   });
-//   return executivesList;
-// }
-
-// async function getDailyCloses(stock: string, reportDates: any) {
-//   var dailyCloses: Array<FMPDailyClose> = [];
-//   var closes = await FMPService.getDailyHistoricalDataLast5Years(stock, reportDates);
-//   Object.entries(closes as string).forEach((response) => {
-//     var [key, value] = response;
-//     var dailyHistoricalData = JSON.parse(JSON.stringify(value).replace(stock, ''));
-//     Object.entries(dailyHistoricalData as string).forEach((day) => {
-//       var [key, value] = day;
-//       var fmpDailyClose = JSON.parse(JSON.stringify(value).replace(stock, '')) as FMPDailyClose;
-//       dailyCloses.push(fmpDailyClose);
-//     });
-//   });
-//   return dailyCloses;
-// }
-
-// // Request Competitor List from API of a given stock
-// async function getCompanyPeerList(stock: string) {
-//   var companyPeersList: Array<string> = [];
-//   var peers = (await FMPService.getCompanyPeers(stock)) as any;
-//   if (JSON.stringify(peers) != '[]') {
-//     Object.entries(peers[0].peersList as any).forEach((peer) => {
-//       var [key, value] = peer;
-//       companyPeersList.push(value as string);
-//     });
-//   }
-//   return companyPeersList;
-// }
-
-// Requests Press Releases from API for a given stock and stores reports as txt file
-// async function getPressReleases(symbol: string) {
-//   console.log('Downloading Press Releases for ' + symbol + '...');
-//   var pressReleases: Array<FMPPressRelease> = [];
-//   var pressReleasesData = await FMPService.getPressReleases(symbol);
-//   for (const pressRelease of Object.entries(pressReleasesData as string)) {
-//     var [key, value] = pressRelease;
-//     var fmpEarningsCallTranscript = JSON.parse(JSON.stringify(value)) as FMPPressRelease;
-//     pressReleases.push(fmpEarningsCallTranscript);
-//   }
-
-//   // Write Transcripts to File
-//   var write = await FileReadWriteService.getInstance().savePressReleasesToTextFile(symbol, pressReleases);
-// }
-
-// Requests News Stories from API for a given stock, Pushes it through Open AI for format and write to a file
-// async function getNewsStories(symbol: string) {
-//   console.log('Downloading News Stories for ' + symbol + '...');
-//   var newsStories: Array<FMPNewsStory> = [];
-//   var newsStoriesData = await FMPService.getNewsStories(symbol);
-//   for (const newsStory of Object.entries(newsStoriesData as string)) {
-//     var [key, value] = newsStory;
-//     var fmpNewsStory = JSON.parse(JSON.stringify(value)) as FMPNewsStory;
-
-//     if (isFilteredNewsStory(fmpNewsStory)) {
-//       // Scrape Website
-//       await WebScraperService.getInstance()
-//         .scrapeWebsite(fmpNewsStory.url)
-//         .then(async (articleText) => {
-//           console.log(key + ' length: ' + articleText.length);
-
-//           fmpNewsStory.text = await OpenAIService.getInstance().extractNewsArticle(symbol, articleText);
-
-//           var write = await FileReadWriteService.getInstance().saveNewsStoryToTextFile(fmpNewsStory);
-//         });
-//     }
-
-//     console.log(key);
-//     if (key === '200') {
-//       break;
-//     }
-//   }
-// }
-
-// Requests list and links of financial report dates
-// async function isNewFinancialDataAvailable(fmpStock: FMPStock) {
-//   var newData = false;
-
-//   var oldDates: Array<string> = [];
-//   fmpStock.financialReportDates.forEach((reportDate) => {
-//     var id = reportDate.date + '-' + reportDate.period;
-//     oldDates.push(id);
-//   });
-
-//   var newDates: Array<string> = [];
-//   var reportDates = await getFinancialReportDates(fmpStock.symbol);
-//   reportDates.forEach((reportDate) => {
-//     var id = reportDate.date + '-' + reportDate.period;
-//     newDates.push(id);
-//   });
-
-//   newDates.forEach((reportDate) => {
-//     if (!oldDates.includes(reportDate)) {
-//       newData = true;
-//     }
-//   });
-
-//   return newData;
-// }
-
-// export async function getEarningsCalanderDates() {
-//   var earningsCalanderDates: Array<FMPEarningsDate> = [];
-//   var dates = await FMPService.getEarningsCalander();
-//   Object.entries(dates as string).forEach((report) => {
-//     var [key, value] = report;
-//     var earningsDate = JSON.parse(JSON.stringify(value)) as FMPEarningsDate;
-//     earningsCalanderDates.push(earningsDate);
-//   });
-//   return earningsCalanderDates;
-// }

@@ -1,18 +1,14 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import fs from 'fs';
 import chalk from 'chalk';
-
-import { ask, readLine } from 'stdio';
-//import * as readline from 'node:readline/promises'
+import { ask } from 'stdio';
 import { stdout as output } from 'process';
-
 import ShortTermMemoryService from './services/ShortTermMemoryService.js';
 import sanitizeInput from './utils.js';
 import LongTermMemoryService from './services/LongTermMemoryService.js';
 import createCommandHandler from './commands.js';
-import OpenAIService from './services/OpenAIService.js';
+import ValueBotService from './services/ValueBotService.js';
 
 // Set up CLI commands
 const commandHandler: CommandHandler = createCommandHandler();
@@ -32,11 +28,11 @@ while (true) {
     const history = await ShortTermMemoryService.getInstance().queryShortTermMemory(question);
     const context = await LongTermMemoryService.getInstance().queryLongTermMemory(question);
     try {
-      response = await OpenAIService.getInstance().queryAll(question, history, context);
+      response = await ValueBotService.getInstance().queryAll(question, history, context);
       if (response) {
         await ShortTermMemoryService.getInstance().addDocumentsToMemoryVectorStore([
           { content: question, metadataType: 'question' },
-          { content: response.text, metadataType: 'answer' },
+          { content: response?.text, metadataType: 'answer' },
         ]);
         //await logChat(chatLogDirectory, question, response.response);
       }

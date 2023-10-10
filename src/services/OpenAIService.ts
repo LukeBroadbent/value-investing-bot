@@ -27,15 +27,14 @@ const callbackManager = CallbackManager.fromHandlers({
 
 const llm = new OpenAIChat({
   streaming: true,
-  callbackManager,
-  modelName: process.env.MODEL || 'gpt-3.5-turbo',
+  modelName: 'gpt-3.5-turbo-16k',
 });
 
 const currentModulePath = fileURLToPath(import.meta.url);
 const projectRootDir = path.resolve(path.dirname(currentModulePath), '..');
 
 // Get the prompt template
-const systemPromptTemplate = fs.readFileSync(path.join(projectRootDir, '../src/prompt.txt'), 'utf8');
+const systemPromptTemplate = fs.readFileSync(path.join(projectRootDir, '../src/summaryPrompt.txt'), 'utf8');
 
 const systemPrompt = SystemMessagePromptTemplate.fromTemplate(oneLine`
   ${systemPromptTemplate}
@@ -46,16 +45,8 @@ const chatPrompt = ChatPromptTemplate.fromPromptMessages([
   HumanMessagePromptTemplate.fromTemplate('QUESTION: """{input}"""'),
 ]);
 
-const bufferWindowMemory = new BufferWindowMemory({
-  returnMessages: false,
-  memoryKey: 'immediate_history',
-  inputKey: 'input',
-  k: 2,
-});
-
 const chain = new LLMChain({
   prompt: chatPrompt,
-  memory: bufferWindowMemory,
   llm,
 });
 
@@ -75,93 +66,38 @@ export default class OpenAIService {
     return OpenAIService._instance;
   }
 
-  async queryAll(question: string, history: string, context: string) {
-    return await chain.call({
-      input: question,
-      context,
-      history,
-      immediate_history: bufferWindowMemory,
-    });
-  }
-
-  async queryOpenAI(query: string) {
-    // Wait 3 seconds before running
-    await this.delay(8000);
-    return await chain.call({
-      input: query,
-      context: '',
-      history: '',
-      immediate_history: bufferWindowMemory,
-    });
+  async summarizeTextViaOpenAI(text: string) {
+    var maxRetry = 3;
+    for (var i = 0; i < maxRetry; i++) {
+      try {
+        return await chain.call({
+          input: 'Summarize the following text',
+          text: text,
+        });
+      } catch (error) {
+        this.delay(5000);
+      }
+    }
+    return undefined;
   }
 
   delay = (delayInms: number) => {
     return new Promise((resolve) => setTimeout(resolve, delayInms));
   };
 
-  async summarizeEarningsTranscript(transcript: string) {
-    console.log('Summarizing Earnings Call Transcript...');
+  async summarizeTextList(textList: string[]) {
 
-    // Prompt Primer
-    var primer =
-      'Can you provide a comprehensive summary of the given Earnings Call Transcript?' +
-      ' The summary should cover all the key points and main ideas presented in the original text,' +
-      ' while also condensing the information into a concise and easy-to-understand format.' +
-      ' Please ensure that the summary includes relevant details and examples that support the main ideas,' +
-      ' while avoiding any unnecessary information or repetition.' +
-      ' The length of the summary should be appropriate for the length and complexity of the original text,' +
-      ' providing a clear and accurate overview without omitting any important information.';
-
-    var primed = await this.queryOpenAI(primer);
-    var combinedSummaries = '';
-
-    if (transcript.length > maxCharactors) {
-      // split line into multiple even sections
-      var splitSummaries: string[] = [];
-      var stringChunks = splitStringByCharacterLimitAndFullStop(transcript, maxCharactors);
-
-      for (var x = 0; x < stringChunks.length; x++) {
-        const response = await this.queryOpenAI(stringChunks[x]);
-        splitSummaries.push(response.text);
-      }
-
-      splitSummaries.forEach((split) => {
-        combinedSummaries = combinedSummaries + split + '\n';
-      });
-    }
-
-    return combinedSummaries;
-  }
-
-  async summarizeText(textList: string[]) {
-    console.log('Summarizing an entire text file line by line...');
-
-    var lineSummaries: string[] = [];
-
-    // Prompt Primer
-    var primer =
-      'Can you provide a comprehensive summary of the given text?' +
-      ' The summary should cover all the key points and main ideas presented in the original text,' +
-      ' while also condensing the information into a concise and easy-to-understand format.' +
-      ' Please ensure that the summary includes relevant details and examples that support the main ideas,' +
-      ' while avoiding any unnecessary information or repetition.' +
-      ' The length of the summary should be appropriate for the length and complexity of the original text,' +
-      ' providing a clear and accurate overview without omitting any important information.';
-
-    var primed = await this.queryOpenAI(primer);
+    var summaries: string[] = [];
 
     for (var i = 0; i < textList.length; i++) {
       if (textList[i].length > maxCharactors) {
-        var splitPrimer =
-          'Before you create your summary you need to accept two inputs. Once the 2nd input is accepted, Do your thing';
-        var splitPrimed = await this.queryOpenAI(splitPrimer);
-
         var splitSummaries: string[] = [];
         var stringChunks = splitStringByCharacterLimitAndFullStop(textList[i], maxCharactors);
 
         for (var x = 0; x < stringChunks.length; x++) {
-          const response = await this.queryOpenAI(stringChunks[x]);
-          splitSummaries.push(response.text);
+          await this.summarizeTextViaOpenAI(stringChunks[x]).then((response) => {
+            splitSummaries.push(response?.text);
+          });
         }
 
         var combinedSummaries = '';
@@ -169,13 +105,63 @@ export default class OpenAIService {
           combinedSummaries = combinedSummaries + split + '\n';
         });
 
-        lineSummaries.push(combinedSummaries);
+        await this.summarizeTextViaOpenAI(combinedSummaries).then((response) => {
+          summaries.push(response?.text);
+        });
       } else {
-        const response = await this.queryOpenAI(textList[i]);
-        lineSummaries.push(response.text);
+        await this.summarizeTextViaOpenAI(textList[i]).then((response) => {
+          summaries.push(response?.text);
+        });
       }
+      break;
     }
 
-    return lineSummaries;
+    return summaries;
+  }
+
+  async summarizeText(text: string) {
+
+    var summary = '';
+    if (text.length > maxCharactors) {
+      var splitSummaries: string[] = [];
+      var stringChunks = splitStringByCharacterLimitAndFullStop(text, maxCharactors);
+
+      for (var x = 0; x < stringChunks.length; x++) {
+        await this.summarizeTextViaOpenAI(stringChunks[x]).then((response) => {
+          splitSummaries.push(response?.text);
+        });
+      }
+
+      var combinedSummaries = '';
+      splitSummaries.forEach((split) => {
+        combinedSummaries = combinedSummaries + split + '\n';
+      });
+
+      await this.summarizeTextViaOpenAI(combinedSummaries).then((response) => {
+        summary = response?.text;
+      });
+    } else {
+      await this.summarizeTextViaOpenAI(text).then((response) => {
+        summary = response?.text;
+      });
+    }
+
+    return summary;
+  }
+
+  async extractNewsArticle(symbol: string, newsStoryText: string) {
+
+    var finalArticle = ''
+    var summarizedText = ''
+    await this.summarizeText(newsStoryText).then((summary) => {
+      summarizedText = summary;
+    });
+
+    var prompt = "I only want the " + symbol + " news from the following: "
+    await this.summarizeTextViaOpenAI(prompt + summarizedText).then((response) => {
+      finalArticle = response?.text;
+    });
+
+    return finalArticle;
   }
 }

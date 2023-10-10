@@ -4,6 +4,7 @@ import { getEarningCallTranscriptsList } from '../../helpers/FinancialModelingPr
 import OpenAIService from '../../services/OpenAIService.js';
 import EarningsCallTranscript from '../financialModelingPrep/EarningsCallTranscript.js';
 import FileReadWriteService from '../../services/FileReadWriteService.js';
+import LongTermMemoryService from '../../services/LongTermMemoryService.js';
 
 const earningsCallTranscriptCommand = createCommand(
   'earnings-calls',
@@ -25,14 +26,20 @@ const earningsCallTranscriptCommand = createCommand(
 
     for (const transcript of transcripts) {
       // Summarize Transcript using OpenAI
-      var transcriptSummary = await OpenAIService.getInstance().summarizeEarningsTranscript(transcript.content);
-      transcript.content = transcriptSummary;
+      await OpenAIService.getInstance()
+        .summarizeText(transcript.content)
+        .then((summary) => {
+          transcript.content = summary;
+        });
 
       // Write Summarized Transcript to File
       var write = await FileReadWriteService.getInstance().saveEarningsCallTranscriptsToTextFile(symbol, transcript);
 
       break;
     }
+
+    // Embed documents
+    await LongTermMemoryService.getInstance().addTranscriptsToLongTermMemory(symbol);
   }
 );
 

@@ -62,7 +62,8 @@ export async function getImportantExcertsFromFinancialReport(json: JSON) {
   return excerts;
 }
 
-export function getKeyValuePairsFromFinancialData(json: JSON) {
+export function getNumericalKeyValuePairsFromFinancialData(json: JSON) {
+  // Ignore String here as we don't care about them, we only care about the numbers
   function traverseJSON(obj: any, result: any) {
     for (const key in obj) {
       if (typeof obj[key] === 'object' && obj[key] !== null) {
@@ -70,11 +71,37 @@ export function getKeyValuePairsFromFinancialData(json: JSON) {
         traverseJSON(obj[key], result);
       } else {
         // If it's not an object, add the key-value pair to the result list
-        result.push({ key, value: obj[key] });
+        // We only accepts numbers
+        if (typeof obj[key] === 'number') {
+          result.push({ key, value: obj[key] });
+        }
       }
     }
   }
   const resultList: any[] = [];
   traverseJSON(json, resultList);
   return resultList;
+}
+
+import NewsStory from './models/financialModelingPrep/NewsStory.js';
+// Update this function to pull stories for different durations. Last Week, Last fortnight, last month, last qtr, last 6 months, last year, last 2 years etc
+export function isFilteredNewsStory(newsStory: NewsStory) {
+  var siteFilters = ['Seeking Alpha', 'Zacks Investment Research', 'InvestorPlace', 'Investopedia', 'Reuters'];
+  if (siteFilters.includes(newsStory.site) && isStoryRescent(newsStory.publishedDate)) {
+    return true;
+  }
+  return false;
+}
+
+function isStoryRescent(storyDate: string) {
+  // Story from the last two years
+  const date = new Date(storyDate);
+  const currentDate = new Date();
+  const twoYearsAgo = new Date();
+  twoYearsAgo.setFullYear(currentDate.getFullYear() - 2);
+
+  if (date >= twoYearsAgo && date <= currentDate) {
+    return true;
+  }
+  return false;
 }

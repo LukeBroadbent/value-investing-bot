@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import createCommand from './command.js';
 import { getFinancialData } from '../../helpers/FinancialModelingPrepHelper.js';
 import FileReadWriteService from '../../services/FileReadWriteService.js';
-import { getKeyValuePairsFromFinancialData } from '../../utils.js';
+import { getNumericalKeyValuePairsFromFinancialData } from '../../utils.js';
 import FinancialData from '../financialModelingPrep/FinancialData.js';
 import LongTermMemoryService from '../../services/LongTermMemoryService.js';
 
@@ -28,7 +28,7 @@ const financialDataCommand = createCommand(
       // Write Yearly Financials to File
       var write = await FileReadWriteService.getInstance().saveFinancialData(symbol, year);
 
-      var keyValuePairs = getKeyValuePairsFromFinancialData(JSON.parse(JSON.stringify(year, null, 4)));
+      var keyValuePairs = getNumericalKeyValuePairsFromFinancialData(JSON.parse(JSON.stringify(year, null, 4)));
 
       // Build key value string to be embedded for database
       var stringsToEmbed: string[] = [];

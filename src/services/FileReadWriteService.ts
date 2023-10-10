@@ -3,6 +3,7 @@ import { jsonToPlainText } from 'json-to-plain-text';
 import EarningsCallTranscript from '../models/financialModelingPrep/EarningsCallTranscript.js';
 import { convertToWindowsFilename } from '../utils.js';
 import FinancialData from '../models/financialModelingPrep/FinancialData.js';
+import NewsStory from '../models/financialModelingPrep/NewsStory.js';
 
 const options = {
   color: false, // Whether to apply colors to the output or not
@@ -12,8 +13,6 @@ const options = {
   doubleQuotesForValues: false, // Whether to use double quotes for string values or not
 };
 const FILEPATH = process.cwd();
-const FILEPATH_STOCKS = FILEPATH + '\\stocks\\';
-const FILEPATH_TICKERS = FILEPATH + '\\tickers.json';
 const FILEPATH_COMPANY = FILEPATH + '\\company\\';
 const FILEPATH_REPORTS = '\\reports\\';
 const FILEPATH_TRANSCRIPTS = '\\transcripts\\';
@@ -226,26 +225,32 @@ export default class FileReadWriteService {
 
   // }
 
-  //   public async saveNewsStoryToTextFile(newsStory: FMPNewsStory) {
+  public async saveNewsStoryToTextFile(newsStory: NewsStory) {
+    const symbol = newsStory.symbol;
+    const text = newsStory.text;
+    const fileName = symbol.toLowerCase() + '-' + convertToWindowsFilename(newsStory.publishedDate) + '.txt';
 
-  //     const symbol = newsStory.symbol
-  //     const text = newsStory.text
-  //     const fileName = symbol.toLowerCase() + "-" + convertToWindowsFilename(newsStory.publishedDate) + ".txt"
-
-  //     return new Promise(function (resolve, reject) {
-  //       if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_NEWS + "\\")) {
-  //         fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_NEWS + fileName, text, function(err, result) {
-  //           if(err) { console.log('error', err); } else { resolve(true) }
-  //         });
-  //       } else {
-  //         fs.mkdirSync(FILEPATH_COMPANY + symbol + FILEPATH_NEWS + "\\", { recursive: true });
-  //         fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_NEWS + "\\" + fileName, text, function(err, result) {
-  //           if(err) { console.log('error', err); } else { resolve(true) }
-  //         });
-  //       }
-  //         })
-
-  // 	}
+    return new Promise(function (resolve, reject) {
+      if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_NEWS + '\\')) {
+        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_NEWS + fileName, text, (err) => {
+          if (err) {
+            console.log('error', err);
+          } else {
+            resolve(true);
+          }
+        });
+      } else {
+        fs.mkdirSync(FILEPATH_COMPANY + symbol + FILEPATH_NEWS + '\\', { recursive: true });
+        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_NEWS + '\\' + fileName, text, (err) => {
+          if (err) {
+            console.log('error', err);
+          } else {
+            resolve(true);
+          }
+        });
+      }
+    });
+  }
 
   //   public async saveBusinessOverviewToTextFile(fileName: string, data: any) {
 
