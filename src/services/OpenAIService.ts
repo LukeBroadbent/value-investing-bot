@@ -71,7 +71,22 @@ export default class OpenAIService {
     for (var i = 0; i < maxRetry; i++) {
       try {
         return await chain.call({
-          input: 'Summarize the following text',
+          input: 'Summarize the following text: ',
+          text: text,
+        });
+      } catch (error) {
+        this.delay(5000);
+      }
+    }
+    return undefined;
+  }
+
+  async extractTextViaOpenAI(symbol: string, text: string) {
+    var maxRetry = 3;
+    for (var i = 0; i < maxRetry; i++) {
+      try {
+        return await chain.call({
+          input: 'Extract the ' + symbol + ' News Article from the following text: ',
           text: text,
         });
       } catch (error) {
@@ -153,12 +168,12 @@ export default class OpenAIService {
 
     var finalArticle = ''
     var summarizedText = ''
-    await this.summarizeText(newsStoryText).then((summary) => {
-      summarizedText = summary;
-    });
-
-    var prompt = "I only want the " + symbol + " news from the following: "
-    await this.summarizeTextViaOpenAI(prompt + summarizedText).then((response) => {
+    // await this.summarizeText(newsStoryText).then((summary) => {
+    //   summarizedText = summary;
+    // });
+    
+    //var prompt = "The following text contains a news article about " + symbol + ". Extract the entire news story as I want to run sentiment analysis on it once extracted: "
+    await this.extractTextViaOpenAI(symbol, newsStoryText).then((response) => {
       finalArticle = response?.text;
     });
 

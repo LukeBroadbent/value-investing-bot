@@ -24,7 +24,7 @@ export default class WebScraperService {
       if (url.includes('investorplace')) {
         const articleElements = $('div');
         articleElements.each((index, element) => {
-          if (index === 55) {
+          if (index === 67) {
             articlesText = $(element).text();
           }
         });

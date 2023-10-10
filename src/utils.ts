@@ -85,23 +85,84 @@ export function getNumericalKeyValuePairsFromFinancialData(json: JSON) {
 
 import NewsStory from './models/financialModelingPrep/NewsStory.js';
 // Update this function to pull stories for different durations. Last Week, Last fortnight, last month, last qtr, last 6 months, last year, last 2 years etc
-export function isFilteredNewsStory(newsStory: NewsStory) {
+export function isFilteredNewsStory(newsStory: NewsStory, timeframe: TimeFrame) {
   var siteFilters = ['Seeking Alpha', 'Zacks Investment Research', 'InvestorPlace', 'Investopedia', 'Reuters'];
-  if (siteFilters.includes(newsStory.site) && isStoryRescent(newsStory.publishedDate)) {
+  if (siteFilters.includes(newsStory.site) && isStoryWithinTimeframe(newsStory.publishedDate, timeframe)) {
     return true;
   }
   return false;
 }
 
-function isStoryRescent(storyDate: string) {
-  // Story from the last two years
+function isStoryWithinTimeframe(storyDate: string, timeframe: TimeFrame) {
   const date = new Date(storyDate);
   const currentDate = new Date();
-  const twoYearsAgo = new Date();
-  twoYearsAgo.setFullYear(currentDate.getFullYear() - 2);
 
-  if (date >= twoYearsAgo && date <= currentDate) {
-    return true;
+  switch(timeframe) {
+
+    case TimeFrame.Week:
+      const weektAgo = new Date();
+      weektAgo.setDate(currentDate.getDate() - 7);
+      if (date >= weektAgo && date <= currentDate) {
+        return true;
+      }
+      return false;
+
+    case TimeFrame.Fortnight:
+      const fortnightAgo = new Date();
+      fortnightAgo.setDate(currentDate.getDate() - 14);
+      if (date >= fortnightAgo && date <= currentDate) {
+        return true;
+      }
+      return false;
+
+    case TimeFrame.Month:
+      const monthAgo = new Date();
+      monthAgo.setMonth(currentDate.getMonth() - 1);
+      if (date >= monthAgo && date <= currentDate) {
+        return true;
+      }
+      return false;
+
+    case TimeFrame.Quarter:
+      const quarterAgo = new Date();
+      quarterAgo.setMonth(currentDate.getMonth() - 3);
+      if (date >= quarterAgo && date <= currentDate) {
+        return true;
+      }
+      return false;
+
+    case TimeFrame.Half:
+      const halfAgo = new Date();
+      halfAgo.setMonth(currentDate.getMonth() - 6);
+      if (date >= halfAgo && date <= currentDate) {
+        return true;
+      }
+      return false;
+
+    case TimeFrame.Year:
+      const oneYearAgo = new Date();
+      oneYearAgo.setFullYear(currentDate.getFullYear() - 1);
+      if (date >= oneYearAgo && date <= currentDate) {
+        return true;
+      }
+      return false;
+
+    case TimeFrame.All:
+      const twoYearsAgo = new Date();
+      twoYearsAgo.setFullYear(currentDate.getFullYear() - 2);
+      if (date >= twoYearsAgo && date <= currentDate) {
+        return true;
+      }
+      return false;
   }
-  return false;
+}
+
+export enum TimeFrame {
+	Week,
+	Fortnight,
+	Month,
+	Quarter,
+	Half,
+	Year,
+  All
 }

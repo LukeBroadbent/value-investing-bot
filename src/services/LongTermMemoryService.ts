@@ -96,7 +96,7 @@ export default class LongTermMemoryService {
   }
 
   async queryLongTermMemory(prompt: string) {
-    var nResults = 10;
+    var nResults = 6;
 
     const vectorStore = await Chroma.fromExistingCollection(new OpenAIEmbeddings(), {
       collectionName: VectorStoreName,
