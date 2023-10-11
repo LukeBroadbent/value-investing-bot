@@ -41,6 +41,8 @@ const financialReportsCommand = createCommand(
 
       break;
     }
+
+    // Embed reports and send to db
   }
 );
 

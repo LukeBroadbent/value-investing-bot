@@ -4,7 +4,8 @@ import earningsCallTranscriptCommand from './models/commands/earningsCallTranscr
 import financialReportsCommand from './models/commands/financialReportsCommand.js';
 import financialDataCommand from './models/commands/financialDataCommand.js';
 import newsStoriesCommand from './models/commands/newsStoriesCommand.js';
-//import changeContextStoreCommand from './commands/switchContextStoreCommand.js';
+import downloadAllCommand from './models/commands/downloadAllCommand.js';
+import pressReleasesCommand from './models/commands/pressReleasesCommand.js';
 
 function createCommandHandler(): CommandHandler {
   const commands: Command[] = [
@@ -13,6 +14,8 @@ function createCommandHandler(): CommandHandler {
     financialReportsCommand,
     financialDataCommand,
     newsStoriesCommand,
+    pressReleasesCommand,
+    downloadAllCommand,
   ];
 
   function getCommands() {

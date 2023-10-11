@@ -34,18 +34,16 @@ const newsStoriesCommand = createCommand(
           .then(async (articleText) => {
             await OpenAIService.getInstance().extractNewsArticle(symbol, articleText).then(storyText => {
               story.text = storyText
-              console.log("Extracted Length: " + storyText.length)
-              console.log(storyText + "\n\n\n")
             })
 
-          var write = await FileReadWriteService.getInstance().saveNewsStoryToTextFile(story);
+            var write = await FileReadWriteService.getInstance().saveNewsStoryToTextFile(story);
 
           });
       }
     }
 
     // Embed and Write to Chroma DB
-    await NewsMemoryService.getInstance().addNewsStoriesToMemory(symbol)
+    //await NewsMemoryService.getInstance().addNewsStoriesToMemory(symbol)
   }
 );
 

@@ -4,6 +4,7 @@ import EarningsCallTranscript from '../models/financialModelingPrep/EarningsCall
 import { convertToWindowsFilename } from '../utils.js';
 import FinancialData from '../models/financialModelingPrep/FinancialData.js';
 import NewsStory from '../models/financialModelingPrep/NewsStory.js';
+import PressRelease from '../models/financialModelingPrep/PressRelease.js';
 
 const options = {
   color: false, // Whether to apply colors to the output or not
@@ -18,6 +19,7 @@ const FILEPATH_REPORTS = '\\reports\\';
 const FILEPATH_TRANSCRIPTS = '\\transcripts\\';
 const FILEPATH_FINANCIALS = '\\financials\\';
 const FILEPATH_NEWS = '\\news\\';
+const FILEPATH_PRESS = '\\press\\'
 const FILEPATH_BUSINESS_REPORT = FILEPATH + '\\business\\';
 
 export default class FileReadWriteService {
@@ -126,25 +128,32 @@ export default class FileReadWriteService {
     });
   }
 
-  // public async savePressReleasesToTextFile(symbol: string, data: any) {
+  public async savePressReleasesToTextFile(symbol: string, pressRelease: PressRelease) {
 
-  // 	const fileName = symbol + "-PressReleases.txt"
-  // 	const text = jsonToPlainText(data, options)
+    const fileName = symbol.toLowerCase() + "-" + pressRelease.date.split(" ")[0] + '-release.txt';
+    const text = pressRelease.date + "\n" + pressRelease.title + "\n" + pressRelease.text;
 
-  // 	return new Promise(function (resolve, reject) {
-  // 		if (fs.existsSync(FILEPATH_COMPANY + symbol + "\\")) {
-  // 			fs.writeFile(FILEPATH_COMPANY + symbol + "\\" + fileName, text, function(err, result) {
-  // 				if(err) { console.log('error', err); } else { resolve(true) }
-  // 			});
-  // 		} else {
-  // 			fs.mkdirSync(FILEPATH_COMPANY + symbol + "\\", { recursive: true });
-  // 			fs.writeFile(FILEPATH_COMPANY + symbol + "\\" + fileName, text, function(err, result) {
-  // 				if(err) { console.log('error', err); } else { resolve(true) }
-  // 			});
-  // 		}
-  //     })
-
-  // }
+    return new Promise(function (resolve, reject) {
+      if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_PRESS + '\\')) {
+        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_PRESS + fileName, text, (err) => {
+          if (err) {
+            console.log('error', err);
+          } else {
+            resolve(true);
+          }
+        });
+      } else {
+        fs.mkdirSync(FILEPATH_COMPANY + symbol + FILEPATH_PRESS + '\\', { recursive: true });
+        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_PRESS + '\\' + fileName, text, (err) => {
+          if (err) {
+            console.log('error', err);
+          } else {
+            resolve(true);
+          }
+        });
+      }
+    });
+  }
 
   public async saveNewsStoryToTextFile(newsStory: NewsStory) {
     const symbol = newsStory.symbol;

@@ -7,6 +7,7 @@ import NewsStory from '../financialModelingPrep/NewsStory.js';
 import WebScraperService from '../../services/WebScraperService.js';
 import OpenAIService from '../../services/OpenAIService.js';
 import NewsMemoryService from '../../services/NewsMemoryService.js';
+import createCommandHandler from '../../commands.js';
 
 const downloadAllCommand = createCommand(
   'download-all',
@@ -23,7 +24,25 @@ const downloadAllCommand = createCommand(
     // This is where we make the call here to download from
     var symbol = args[0].toUpperCase();
 
-    console.log(symbol)
+    console.log("Downloading " + symbol + " data to be embedded into long term memory")
+
+    // Set up Command Handler
+    const commandHandler: CommandHandler = createCommandHandler();
+
+    // Download Financial Reports
+    await commandHandler.execute("financial-reports", args, output);
+
+    // Download Financial Data
+    await commandHandler.execute("financial-data", args, output);
+
+    // Download Earnings Transcripts
+    await commandHandler.execute("earnings-calls", args, output);
+
+    // Download Press Releases
+    await commandHandler.execute("press-releases", args, output);
+
+    // Download Financial Data
+    await commandHandler.execute("news-stories", args, output);
 
   }
 );

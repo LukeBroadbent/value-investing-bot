@@ -10,6 +10,7 @@ import Ratios from '../models/financialModelingPrep/Ratios.js';
 import FinancialModelingPrepService from '../services/FinancialModelingPrepService.js';
 import WebScraperService from '../services/WebScraperService.js';
 import { isFilteredNewsStory } from '../utils.js';
+import PressRelease from '../models/financialModelingPrep/PressRelease.js';
 
 const FMPService = FinancialModelingPrepService.getInstance();
 
@@ -104,8 +105,8 @@ export async function getNewsStories(symbol: string) {
   var newsStoriesData = await FMPService.getNewsStories(symbol);
   for (const newsStory of Object.entries(newsStoriesData as string)) {
     var [key, value] = newsStory;
-    var newsStory = JSON.parse(JSON.stringify(value)) as NewsStory;
-    newsStories.push(newsStory);
+    var story = JSON.parse(JSON.stringify(value)) as NewsStory;
+    newsStories.push(story);
 
     // Below is for testing. to only grab 10 articles
     if (key === '10') {
@@ -115,16 +116,17 @@ export async function getNewsStories(symbol: string) {
   return newsStories;
 }
 
-// Requests Data from the API that will be used for building AI Data Model
-export async function getStockDataForAIDataModel(stock: string) {
-  // Financial Reports
-  //await getFinancialReports(stock)
-  // Earnings Calls
-  //await getEarningCallTranscripts(stock)
-  // Press Releases
-  //await getPressReleases(stock)
-  // News Stories
-  //await getNewsStories(stock);
+// Requests Press Releases from API for a given stock and stores reports as txt file
+export async function getPressReleases(symbol: string) {
+	console.log("Downloading Press Releases for " + symbol + "...")
+	var pressReleases: Array<PressRelease> = []
+	var pressReleasesData = await FMPService.getPressReleases(symbol)
+	for (const pressRelease of Object.entries(pressReleasesData as string)) {
+		var [key, value] = pressRelease;
+		var fmpEarningsCallTranscript = JSON.parse(JSON.stringify(value)) as PressRelease
+		pressReleases.push(fmpEarningsCallTranscript)
+  }
+  return pressReleases
 }
 
 // Requests Income Statements from API for a given stock

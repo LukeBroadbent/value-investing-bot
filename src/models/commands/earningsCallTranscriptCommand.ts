@@ -39,7 +39,7 @@ const earningsCallTranscriptCommand = createCommand(
     }
 
     // Embed documents
-    await LongTermMemoryService.getInstance().addTranscriptsToLongTermMemory(symbol);
+    //await LongTermMemoryService.getInstance().addTranscriptsToLongTermMemory(symbol);
   }
 );
 
