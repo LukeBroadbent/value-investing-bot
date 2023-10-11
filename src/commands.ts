@@ -6,6 +6,7 @@ import financialDataCommand from './models/commands/financialDataCommand.js';
 import newsStoriesCommand from './models/commands/newsStoriesCommand.js';
 import downloadAllCommand from './models/commands/downloadAllCommand.js';
 import pressReleasesCommand from './models/commands/pressReleasesCommand.js';
+import generateReportCommand from './models/commands/generateReportCommand.js';
 
 function createCommandHandler(): CommandHandler {
   const commands: Command[] = [
@@ -16,6 +17,7 @@ function createCommandHandler(): CommandHandler {
     newsStoriesCommand,
     pressReleasesCommand,
     downloadAllCommand,
+    generateReportCommand,
   ];
 
   function getCommands() {

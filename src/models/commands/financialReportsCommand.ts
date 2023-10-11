@@ -24,10 +24,11 @@ const financialReportsCommand = createCommand(
     // calls API to download data
     var reports: Array<FinancialReport> = await getFinancialReports(symbol);
 
+    console.log("Summarizing Financial Reports for " + symbol + "...")
     for (const report of reports) {
       //Gather Important Text from financial report
+      
       var excerts = await getImportantExcertsFromFinancialReport(report.json);
-      console.log(excerts.length);
 
       // Summarizes all excerts from a financial report to be written to file
       var excertSummaries = await OpenAIService.getInstance().summarizeTextList(excerts);
@@ -43,6 +44,7 @@ const financialReportsCommand = createCommand(
     }
 
     // Embed reports and send to db
+    console.log("Embedding Financial Reports for " + symbol + "...")
   }
 );
 

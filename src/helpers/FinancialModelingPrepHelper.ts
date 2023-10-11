@@ -68,7 +68,7 @@ export async function getFinancialReports(symbol: string) {
   for (const date of financialReportDates) {
     // Annual Reports
     if (date.period === 'FY' && date.linkJson != null) {
-      console.log('\t~ ' + date.date);
+      //console.log('\t~ ' + date.date);
       var reportData = await FMPService.getFinancialReport(date.linkJson);
       var finanicalReport = new FinancialReport(date.symbol, date.period, date.date, reportData as JSON);
       financialReports.push(finanicalReport);
@@ -76,7 +76,7 @@ export async function getFinancialReports(symbol: string) {
 
     // Quartetly Reports
     if (date.period.includes('Q') && date.linkJson != null) {
-      console.log('\t~ ' + date.date + ' - ' + date.period);
+      //console.log('\t~ ' + date.date + ' - ' + date.period);
       var reportData = await FMPService.getFinancialReport(date.linkJson);
       var finanicalReport = new FinancialReport(date.symbol, date.period, date.date, reportData as JSON);
       financialReports.push(finanicalReport);

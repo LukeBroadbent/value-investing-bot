@@ -27,6 +27,7 @@ const newsStoriesCommand = createCommand(
     var timeFrame = TimeFrame.Week
     var newsStories: Array<NewsStory> = await getNewsStories(symbol);
 
+    console.log("Summarizing News Stories for " + symbol + "...")
     for (const story of newsStories) {
       if (isFilteredNewsStory(story, timeFrame)) {
         await WebScraperService.getInstance()
@@ -43,6 +44,7 @@ const newsStoriesCommand = createCommand(
     }
 
     // Embed and Write to Chroma DB
+    console.log("Embedding News Stories for " + symbol + "...")
     //await NewsMemoryService.getInstance().addNewsStoriesToMemory(symbol)
   }
 );

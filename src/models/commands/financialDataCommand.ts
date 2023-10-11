@@ -24,6 +24,7 @@ const financialDataCommand = createCommand(
     // calls API to download data
     var yearlyData: Array<FinancialData> = await getFinancialData(symbol);
 
+    console.log("Summarizing and Embedding Financial Data for " + symbol + "...")
     for (const year of yearlyData) {
       // Write Yearly Financials to File
       var write = await FileReadWriteService.getInstance().saveFinancialData(symbol, year);

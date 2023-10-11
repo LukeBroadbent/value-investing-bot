@@ -24,6 +24,7 @@ const earningsCallTranscriptCommand = createCommand(
     // calls API to download data
     var transcripts: Array<EarningsCallTranscript> = await getEarningCallTranscriptsList(symbol);
 
+    console.log("Summarizing Earnings Call Transcripts for " + symbol + "...")
     for (const transcript of transcripts) {
       // Summarize Transcript using OpenAI
       await OpenAIService.getInstance()
@@ -39,6 +40,7 @@ const earningsCallTranscriptCommand = createCommand(
     }
 
     // Embed documents
+    console.log("Embedding Earnings Call Transcripts for + " + symbol + "...")
     //await LongTermMemoryService.getInstance().addTranscriptsToLongTermMemory(symbol);
   }
 );

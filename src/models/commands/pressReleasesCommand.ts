@@ -27,7 +27,8 @@ const pressReleasesCommand = createCommand(
     }
 
     // Embed and Write to Chroma DB
-      //await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
+    console.log("Embedding Press Releases for + " + symbol + "...")
+    //await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
   }
 );
 
