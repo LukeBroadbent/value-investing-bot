@@ -13,7 +13,7 @@ import { ChromaClient } from 'chromadb';
 import { Document } from 'langchain/document';
 import { Chroma } from 'langchain/vectorstores/chroma';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-
+import { BaseDocumentLoader } from 'langchain/document_loaders/base';
 const VectorStoreName = 'long-term-memory';
 
 export default class LongTermMemoryService {
@@ -70,18 +70,11 @@ export default class LongTermMemoryService {
     console.log('Finished Adding Docs to Long Term Memory');
   }
 
-  async addTranscriptsToLongTermMemory(symbol: string): Promise<void> {
-    var documentsLocation = './company/' + symbol + '/transcripts/';
+  async addTranscriptToLongTermMemory(symbol: string, fileName: string): Promise<void> {
 
-    // Initialize the document loader with supported file formats
-    const loader = new DirectoryLoader(documentsLocation, {
-      '.json': (path) => new JSONLoader(path),
-      '.txt': (path) => new TextLoader(path),
-    });
-
-    const docs = await loader.loadAndSplit(new RecursiveCharacterTextSplitter());
-    console.log(symbol + ' transcripts gathered');
-    console.log('length: ' + docs.length);
+    var documentLocation = './company/' + symbol + '/transcripts/' + fileName;
+    const loader = new TextLoader(documentLocation);
+    const docs = await loader.load()
 
     // Create vector store and index the docs
     await Chroma.fromDocuments(docs, new OpenAIEmbeddings(), {
@@ -92,7 +85,6 @@ export default class LongTermMemoryService {
       },
     });
 
-    console.log('Finished adding ' + symbol + ' Transcripts to Long Term Memory');
   }
 
   async queryLongTermMemory(prompt: string) {

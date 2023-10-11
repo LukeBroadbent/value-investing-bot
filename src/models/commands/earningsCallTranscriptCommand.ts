@@ -26,9 +26,13 @@ const earningsCallTranscriptCommand = createCommand(
     var transcripts: Array<EarningsCallTranscript> = await getEarningCallTranscriptsList(symbol);
 
     console.log('Summarizing Earnings Call Transcripts for ' + symbol + '...');
+
     for (const transcript of transcripts) {
+    
       const fileName = symbol.toLowerCase() + '-q' + transcript.quarter + '-' + transcript.year + '-transcript.txt';
+    
       if (!doesFileExistInDirectory(symbol, fileName, Directory.Transcripts)) {
+
         // Summarize Transcript using OpenAI
         await OpenAIService.getInstance()
           .summarizeText(transcript.content)
@@ -37,18 +41,23 @@ const earningsCallTranscriptCommand = createCommand(
           });
 
         // Write Summarized Transcript to File
+        console.log('Creating ' + fileName + '...');
         var write = await FileReadWriteService.getInstance().saveEarningsCallTranscriptsToTextFile(
           symbol,
           fileName,
           transcript
         );
 
+        // Embed Document
+        console.log('Embedding ' + fileName + '...');
+        await LongTermMemoryService.getInstance().addTranscriptToLongTermMemory(symbol, fileName)
+
         break;
       }
     }
 
     // Embed documents
-    console.log('Embedding Earnings Call Transcripts for + ' + symbol + '...');
+    
     //await LongTermMemoryService.getInstance().addTranscriptsToLongTermMemory(symbol);
   }
 );
