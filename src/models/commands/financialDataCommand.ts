@@ -41,8 +41,9 @@ const financialDataCommand = createCommand(
         });
 
         // Embed and Write to Chroma DB
-        //await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
+        await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
       }
+      break
     }
   }
 );
