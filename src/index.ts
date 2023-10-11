@@ -14,7 +14,7 @@ import ValueBotService from './services/ValueBotService.js';
 const commandHandler: CommandHandler = createCommandHandler();
 
 //LongTermMemoryService.getInstance().deleteCollection()
-
+//LongTermMemoryService.getInstance().addFinancialReportToLongTermMemory("pypl", "PYPL-2022-FY.txt")
 
 while (true) {
   const userInput = await ask(chalk.green('\nStart chatting or type /help for a list of commands\n'));

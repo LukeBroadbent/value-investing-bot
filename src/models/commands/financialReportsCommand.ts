@@ -5,6 +5,7 @@ import OpenAIService from '../../services/OpenAIService.js';
 import FileReadWriteService, { doesFileExistInDirectory } from '../../services/FileReadWriteService.js';
 import FinancialReport from '../financialModelingPrep/FinancialReport.js';
 import { Directory, getImportantExcertsFromFinancialReport } from '../../utils.js';
+import LongTermMemoryService from '../../services/LongTermMemoryService.js';
 
 const financialReportsCommand = createCommand(
   'financial-reports',
@@ -26,9 +27,9 @@ const financialReportsCommand = createCommand(
 
     console.log('Summarizing Financial Reports for ' + symbol + '...');
     for (const report of reports) {
-      // Check if report has already been created
-      var filename = symbol + '-' + report.year + '-' + report.period;
-      if (!doesFileExistInDirectory(symbol, filename, Directory.Reports)) {
+      
+      var fileName = symbol + '-' + report.year + '-' + report.period + ".txt";
+      if (!doesFileExistInDirectory(symbol, fileName, Directory.Reports)) {
         //Gather Important Text from financial report
         var excerts = await getImportantExcertsFromFinancialReport(report.json);
 
@@ -38,13 +39,18 @@ const financialReportsCommand = createCommand(
         // Write Summarized Financial Reports to File
         var write = await FileReadWriteService.getInstance().saveFinancialReport(
           report.symbol,
-          filename,
+          fileName,
           excertSummaries
         );
+
+        // Embed reports and send to db
+        console.log('Embedding ' + fileName + '...');
+        await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(excertSummaries)
+
       }
 
-      // Embed reports and send to db
-      console.log('Embedding Financial Reports for ' + symbol + '...');
+      break // make sure only 1 file is embedding for testing purposes
+
     }
   }
 );

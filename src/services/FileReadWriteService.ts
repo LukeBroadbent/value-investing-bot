@@ -48,7 +48,7 @@ export default class FileReadWriteService {
 
     return new Promise(function (resolve, reject) {
       if (fs.existsSync(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + '\\')) {
-        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + fileName + '.txt', text, (err) => {
+        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + fileName, text, (err) => {
           if (err) {
             console.log('error', err);
           } else {
@@ -57,7 +57,7 @@ export default class FileReadWriteService {
         });
       } else {
         fs.mkdirSync(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + '\\', { recursive: true });
-        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + '\\' + fileName + '.txt', text, (err) => {
+        fs.writeFile(FILEPATH_COMPANY + symbol + FILEPATH_REPORTS + '\\' + fileName, text, (err) => {
           if (err) {
             console.log('error', err);
           } else {

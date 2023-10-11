@@ -127,7 +127,6 @@ export default class OpenAIService {
           summaries.push(response?.text);
         });
       }
-      break;
     }
 
     return summaries;
