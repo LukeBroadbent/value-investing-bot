@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 import createCommand from './command.js';
 import { getNewsStories } from '../../helpers/FinancialModelingPrepHelper.js';
-import FileReadWriteService from '../../services/FileReadWriteService.js';
-import { TimeFrame, isFilteredNewsStory } from '../../utils.js';
+import FileReadWriteService, { doesFileExistInDirectory } from '../../services/FileReadWriteService.js';
+import { Directory, TimeFrame, convertToWindowsFilename, isFilteredNewsStory } from '../../utils.js';
 import NewsStory from '../financialModelingPrep/NewsStory.js';
 import WebScraperService from '../../services/WebScraperService.js';
 import OpenAIService from '../../services/OpenAIService.js';
@@ -24,27 +24,30 @@ const newsStoriesCommand = createCommand(
     var symbol = args[0].toUpperCase();
 
     // Sets Timeframe for News Article Downloads
-    var timeFrame = TimeFrame.Week
+    var timeFrame = TimeFrame.Week;
     var newsStories: Array<NewsStory> = await getNewsStories(symbol);
 
-    console.log("Summarizing News Stories for " + symbol + "...")
+    console.log('Summarizing News Stories for ' + symbol + '...');
     for (const story of newsStories) {
-      if (isFilteredNewsStory(story, timeFrame)) {
+      const fileName = symbol.toLowerCase() + '-' + convertToWindowsFilename(story.publishedDate) + '.txt';
+
+      if (isFilteredNewsStory(story, timeFrame) && !doesFileExistInDirectory(symbol, fileName, Directory.News)) {
         await WebScraperService.getInstance()
           .scrapeWebsite(story.url)
           .then(async (articleText) => {
-            await OpenAIService.getInstance().extractNewsArticle(symbol, articleText).then(storyText => {
-              story.text = storyText
-            })
+            await OpenAIService.getInstance()
+              .extractNewsArticle(symbol, articleText)
+              .then((storyText) => {
+                story.text = storyText;
+              });
 
             var write = await FileReadWriteService.getInstance().saveNewsStoryToTextFile(story);
-
           });
       }
     }
 
     // Embed and Write to Chroma DB
-    console.log("Embedding News Stories for " + symbol + "...")
+    console.log('Embedding News Stories for ' + symbol + '...');
     //await NewsMemoryService.getInstance().addNewsStoriesToMemory(symbol)
   }
 );

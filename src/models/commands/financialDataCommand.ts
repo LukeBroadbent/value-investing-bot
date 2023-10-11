@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 import createCommand from './command.js';
 import { getFinancialData } from '../../helpers/FinancialModelingPrepHelper.js';
-import FileReadWriteService from '../../services/FileReadWriteService.js';
-import { getNumericalKeyValuePairsFromFinancialData } from '../../utils.js';
+import FileReadWriteService, { doesFileExistInDirectory } from '../../services/FileReadWriteService.js';
+import { Directory, getNumericalKeyValuePairsFromFinancialData } from '../../utils.js';
 import FinancialData from '../financialModelingPrep/FinancialData.js';
 import LongTermMemoryService from '../../services/LongTermMemoryService.js';
 
@@ -24,21 +24,25 @@ const financialDataCommand = createCommand(
     // calls API to download data
     var yearlyData: Array<FinancialData> = await getFinancialData(symbol);
 
-    console.log("Summarizing and Embedding Financial Data for " + symbol + "...")
+    console.log('Summarizing and Embedding Financial Data for ' + symbol + '...');
     for (const year of yearlyData) {
-      // Write Yearly Financials to File
-      var write = await FileReadWriteService.getInstance().saveFinancialData(symbol, year);
+      const fileName = symbol.toLowerCase() + '-financials-' + year.financial_year + '.json';
 
-      var keyValuePairs = getNumericalKeyValuePairsFromFinancialData(JSON.parse(JSON.stringify(year, null, 4)));
+      if (!doesFileExistInDirectory(symbol, fileName, Directory.Financials)) {
+        // Write Yearly Financials to File
+        var write = await FileReadWriteService.getInstance().saveFinancialData(symbol, fileName, year);
 
-      // Build key value string to be embedded for database
-      var stringsToEmbed: string[] = [];
-      keyValuePairs.forEach((keyValue) => {
-        stringsToEmbed.push(year.financial_year + '_' + symbol + '_' + keyValue.key + '_' + keyValue.value);
-      });
+        var keyValuePairs = getNumericalKeyValuePairsFromFinancialData(JSON.parse(JSON.stringify(year, null, 4)));
 
-      // Embed and Write to Chroma DB
-      //await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
+        // Build key value string to be embedded for database
+        var stringsToEmbed: string[] = [];
+        keyValuePairs.forEach((keyValue) => {
+          stringsToEmbed.push(year.financial_year + '_' + symbol + '_' + keyValue.key + '_' + keyValue.value);
+        });
+
+        // Embed and Write to Chroma DB
+        //await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
+      }
     }
   }
 );

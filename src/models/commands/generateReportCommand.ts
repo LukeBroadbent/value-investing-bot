@@ -15,7 +15,8 @@ const generateReportCommand = createCommand(
 
     // This is where we make the call here to download from
     var symbol = args[0].toUpperCase();
-    
+
+    console.log('Generating Company Report for ' + symbol);
   }
 );
 

@@ -1,9 +1,10 @@
 import chalk from 'chalk';
 import createCommand from './command.js';
 import { getPressReleases } from '../../helpers/FinancialModelingPrepHelper.js';
-import FileReadWriteService from '../../services/FileReadWriteService.js';
+import FileReadWriteService, { doesFileExistInDirectory } from '../../services/FileReadWriteService.js';
 import LongTermMemoryService from '../../services/LongTermMemoryService.js';
 import PressRelease from '../financialModelingPrep/PressRelease.js';
+import { Directory } from '../../utils.js';
 
 const pressReleasesCommand = createCommand(
   'press-releases',
@@ -21,13 +22,19 @@ const pressReleasesCommand = createCommand(
     var symbol = args[0].toUpperCase();
     var pressReleases: Array<PressRelease> = await getPressReleases(symbol);
 
+    // Iterates through all downloaded Press Releases
     for (const release of pressReleases) {
-      // Write Yearly Financials to File
-      var write = await FileReadWriteService.getInstance().savePressReleasesToTextFile(symbol, release);
+      const fileName = symbol.toLowerCase() + '-' + release.date.split(' ')[0] + '-release.txt';
+
+      // Stores Press Release if it hasn't been downloaded
+      if (!doesFileExistInDirectory(symbol, fileName, Directory.Press)) {
+        // Write Yearly Financials to File
+        var write = await FileReadWriteService.getInstance().savePressReleasesToTextFile(symbol, fileName, release);
+      }
     }
 
     // Embed and Write to Chroma DB
-    console.log("Embedding Press Releases for + " + symbol + "...")
+    console.log('Embedding Press Releases for ' + symbol + '...');
     //await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
   }
 );

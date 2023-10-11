@@ -2,9 +2,9 @@ import chalk from 'chalk';
 import createCommand from './command.js';
 import { getFinancialReports } from '../../helpers/FinancialModelingPrepHelper.js';
 import OpenAIService from '../../services/OpenAIService.js';
-import FileReadWriteService from '../../services/FileReadWriteService.js';
+import FileReadWriteService, { doesFileExistInDirectory } from '../../services/FileReadWriteService.js';
 import FinancialReport from '../financialModelingPrep/FinancialReport.js';
-import { getImportantExcertsFromFinancialReport } from '../../utils.js';
+import { Directory, getImportantExcertsFromFinancialReport } from '../../utils.js';
 
 const financialReportsCommand = createCommand(
   'financial-reports',
@@ -24,27 +24,28 @@ const financialReportsCommand = createCommand(
     // calls API to download data
     var reports: Array<FinancialReport> = await getFinancialReports(symbol);
 
-    console.log("Summarizing Financial Reports for " + symbol + "...")
+    console.log('Summarizing Financial Reports for ' + symbol + '...');
     for (const report of reports) {
-      //Gather Important Text from financial report
-      
-      var excerts = await getImportantExcertsFromFinancialReport(report.json);
+      // Check if report has already been created
+      var filename = symbol + '-' + report.year + '-' + report.period;
+      if (!doesFileExistInDirectory(symbol, filename, Directory.Reports)) {
+        //Gather Important Text from financial report
+        var excerts = await getImportantExcertsFromFinancialReport(report.json);
 
-      // Summarizes all excerts from a financial report to be written to file
-      var excertSummaries = await OpenAIService.getInstance().summarizeTextList(excerts);
+        // Summarizes all excerts from a financial report to be written to file
+        var excertSummaries = await OpenAIService.getInstance().summarizeTextList(excerts);
 
-      // Write Summarized Financial Reports to File
-      var write = await FileReadWriteService.getInstance().saveFinancialReport(
-        report.symbol,
-        symbol + '-' + report.year + '-' + report.period,
-        excertSummaries
-      );
+        // Write Summarized Financial Reports to File
+        var write = await FileReadWriteService.getInstance().saveFinancialReport(
+          report.symbol,
+          filename,
+          excertSummaries
+        );
+      }
 
-      break;
+      // Embed reports and send to db
+      console.log('Embedding Financial Reports for ' + symbol + '...');
     }
-
-    // Embed reports and send to db
-    console.log("Embedding Financial Reports for " + symbol + "...")
   }
 );
 

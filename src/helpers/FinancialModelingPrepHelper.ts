@@ -62,7 +62,7 @@ export async function getFinancialReports(symbol: string) {
   var financialReportDates: Array<FinancialReportDate> = await getFinancialReportDates(symbol);
 
   // Download Report JSON
-  
+
   var financialReports: Array<FinancialReport> = [];
 
   for (const date of financialReportDates) {
@@ -118,15 +118,15 @@ export async function getNewsStories(symbol: string) {
 
 // Requests Press Releases from API for a given stock and stores reports as txt file
 export async function getPressReleases(symbol: string) {
-	console.log("Downloading Press Releases for " + symbol + "...")
-	var pressReleases: Array<PressRelease> = []
-	var pressReleasesData = await FMPService.getPressReleases(symbol)
-	for (const pressRelease of Object.entries(pressReleasesData as string)) {
-		var [key, value] = pressRelease;
-		var fmpEarningsCallTranscript = JSON.parse(JSON.stringify(value)) as PressRelease
-		pressReleases.push(fmpEarningsCallTranscript)
+  console.log('Downloading Press Releases for ' + symbol + '...');
+  var pressReleases: Array<PressRelease> = [];
+  var pressReleasesData = await FMPService.getPressReleases(symbol);
+  for (const pressRelease of Object.entries(pressReleasesData as string)) {
+    var [key, value] = pressRelease;
+    var fmpEarningsCallTranscript = JSON.parse(JSON.stringify(value)) as PressRelease;
+    pressReleases.push(fmpEarningsCallTranscript);
   }
-  return pressReleases
+  return pressReleases;
 }
 
 // Requests Income Statements from API for a given stock

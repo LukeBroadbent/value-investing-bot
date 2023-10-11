@@ -97,8 +97,7 @@ function isStoryWithinTimeframe(storyDate: string, timeframe: TimeFrame) {
   const date = new Date(storyDate);
   const currentDate = new Date();
 
-  switch(timeframe) {
-
+  switch (timeframe) {
     case TimeFrame.Week:
       const weektAgo = new Date();
       weektAgo.setDate(currentDate.getDate() - 7);
@@ -158,11 +157,19 @@ function isStoryWithinTimeframe(storyDate: string, timeframe: TimeFrame) {
 }
 
 export enum TimeFrame {
-	Week,
-	Fortnight,
-	Month,
-	Quarter,
-	Half,
-	Year,
-  All
+  Week,
+  Fortnight,
+  Month,
+  Quarter,
+  Half,
+  Year,
+  All,
+}
+
+export enum Directory {
+  Financials,
+  News,
+  Press,
+  Reports,
+  Transcripts,
 }

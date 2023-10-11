@@ -3,8 +3,9 @@ import createCommand from './command.js';
 import { getEarningCallTranscriptsList } from '../../helpers/FinancialModelingPrepHelper.js';
 import OpenAIService from '../../services/OpenAIService.js';
 import EarningsCallTranscript from '../financialModelingPrep/EarningsCallTranscript.js';
-import FileReadWriteService from '../../services/FileReadWriteService.js';
+import FileReadWriteService, { doesFileExistInDirectory } from '../../services/FileReadWriteService.js';
 import LongTermMemoryService from '../../services/LongTermMemoryService.js';
+import { Directory } from '../../utils.js';
 
 const earningsCallTranscriptCommand = createCommand(
   'earnings-calls',
@@ -24,23 +25,30 @@ const earningsCallTranscriptCommand = createCommand(
     // calls API to download data
     var transcripts: Array<EarningsCallTranscript> = await getEarningCallTranscriptsList(symbol);
 
-    console.log("Summarizing Earnings Call Transcripts for " + symbol + "...")
+    console.log('Summarizing Earnings Call Transcripts for ' + symbol + '...');
     for (const transcript of transcripts) {
-      // Summarize Transcript using OpenAI
-      await OpenAIService.getInstance()
-        .summarizeText(transcript.content)
-        .then((summary) => {
-          transcript.content = summary;
-        });
+      const fileName = symbol.toLowerCase() + '-q' + transcript.quarter + '-' + transcript.year + '-transcript.txt';
+      if (!doesFileExistInDirectory(symbol, fileName, Directory.Transcripts)) {
+        // Summarize Transcript using OpenAI
+        await OpenAIService.getInstance()
+          .summarizeText(transcript.content)
+          .then((summary) => {
+            transcript.content = summary;
+          });
 
-      // Write Summarized Transcript to File
-      var write = await FileReadWriteService.getInstance().saveEarningsCallTranscriptsToTextFile(symbol, transcript);
+        // Write Summarized Transcript to File
+        var write = await FileReadWriteService.getInstance().saveEarningsCallTranscriptsToTextFile(
+          symbol,
+          fileName,
+          transcript
+        );
 
-      break;
+        break;
+      }
     }
 
     // Embed documents
-    console.log("Embedding Earnings Call Transcripts for + " + symbol + "...")
+    console.log('Embedding Earnings Call Transcripts for + ' + symbol + '...');
     //await LongTermMemoryService.getInstance().addTranscriptsToLongTermMemory(symbol);
   }
 );

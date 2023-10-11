@@ -101,7 +101,6 @@ export default class OpenAIService {
   };
 
   async summarizeTextList(textList: string[]) {
-
     var summaries: string[] = [];
 
     for (var i = 0; i < textList.length; i++) {
@@ -135,7 +134,6 @@ export default class OpenAIService {
   }
 
   async summarizeText(text: string) {
-
     var summary = '';
     if (text.length > maxCharactors) {
       var splitSummaries: string[] = [];
@@ -165,13 +163,12 @@ export default class OpenAIService {
   }
 
   async extractNewsArticle(symbol: string, newsStoryText: string) {
-
-    var finalArticle = ''
-    var summarizedText = ''
+    var finalArticle = '';
+    var summarizedText = '';
     // await this.summarizeText(newsStoryText).then((summary) => {
     //   summarizedText = summary;
     // });
-    
+
     //var prompt = "The following text contains a news article about " + symbol + ". Extract the entire news story as I want to run sentiment analysis on it once extracted: "
     await this.extractTextViaOpenAI(symbol, newsStoryText).then((response) => {
       finalArticle = response?.text;

@@ -24,26 +24,25 @@ const downloadAllCommand = createCommand(
     // This is where we make the call here to download from
     var symbol = args[0].toUpperCase();
 
-    console.log("Downloading " + symbol + " data to be embedded into long term memory")
+    console.log('Downloading ' + symbol + ' data to be embedded into long term memory');
 
     // Set up Command Handler
     const commandHandler: CommandHandler = createCommandHandler();
 
     // Download Financial Reports
-    await commandHandler.execute("financial-reports", args, output);
+    await commandHandler.execute('financial-reports', args, output);
 
     // Download Financial Data
-    await commandHandler.execute("financial-data", args, output);
+    await commandHandler.execute('financial-data', args, output);
 
     // Download Earnings Transcripts
-    await commandHandler.execute("earnings-calls", args, output);
+    await commandHandler.execute('earnings-calls', args, output);
 
     // Download Press Releases
-    await commandHandler.execute("press-releases", args, output);
+    await commandHandler.execute('press-releases', args, output);
 
     // Download Financial Data
-    await commandHandler.execute("news-stories", args, output);
-
+    await commandHandler.execute('news-stories', args, output);
   }
 );
 
