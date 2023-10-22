@@ -1,0 +1,23 @@
+{
+    "Dividend History": [
+       "Provide the historical dividend payments made by the company over the past few years."
+    ],
+    "Dividend Frequency": [
+       "How often does the company pay dividends (e.g., quarterly, annually)?"
+    ],
+    "Dividend Yield": [
+       "What is the current dividend yield, and how does it compare to industry averages?"
+    ],
+    "Dividend Growth": [
+       "Has the company demonstrated a history of increasing dividends over time?"
+    ],
+    "Payout Ratio": [
+       "What is the dividend payout ratio, and how does it relate to the company's earnings?"
+    ],
+    "Dividend Reinvestment Plan (DRIP)": [
+       "Does the company offer a DRIP for shareholders, and how does it work?"
+    ],
+    "Dividend Stability": [
+       "How stable are dividend payments, and what measures are in place to maintain stability?"
+    ]
+ }

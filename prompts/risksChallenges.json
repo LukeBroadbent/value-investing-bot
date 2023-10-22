@@ -1,0 +1,49 @@
+{
+   "Operational Risks": [
+      "Describe how the company mitigates risks associated with supply chain disruptions.",
+      "Discuss operational challenges related to production, quality control, or efficiency.",
+      "Explain how the company addresses labor-related risks, including talent shortages or labor disputes.",
+      "Detail the technology-related risks, such as cybersecurity threats or system failures, and how the company manages them.",
+      "Share how the company manages and complies with industry-specific regulations and standards.",
+      "Assess the risk of market saturation or declining demand for the company's products or services.",
+      "Provide information on current or potential legal challenges, lawsuits, or regulatory fines.",
+      "Discuss how the company addresses operational inefficiencies or cost management challenges."
+   ],
+   "Market and Competitive Risks": [
+      "Explain how the company navigates intense competition and disruptive competitors in its industry.",
+      "Describe the risks associated with shifting market trends and evolving consumer preferences.",
+      "Share how the company protects its market share from competitors.",
+      "Discuss the risks arising from changes in regulations, tariffs, or trade policies impacting the company's industry.",
+      "Explain how geopolitical tensions or trade conflicts influence the company's market and operations.",
+      "Assess the risks associated with expansion into emerging markets."
+   ],
+   "Financial Risks": [
+      "Provide insights into the company's debt levels and potential financial leverage risks.",
+      "Explain how the company manages liquidity and potential liquidity crises.",
+      "Assess whether the company is exposed to interest rate fluctuations and how it mitigates this risk.",
+      "Discuss how currency exchange rate fluctuations impact the company's financials.",
+      "Share information about how the company manages risks associated with volatile commodity prices.",
+      "Provide insights into credit risk, supplier relationships, or counterparty risks."
+   ],
+   "Environmental and Sustainability Risks": [
+      "Discuss how the company addresses risks related to environmental regulations and sustainability.",
+      "Detail potential risks related to climate change and its impact on operations and how the company mitigates them.",
+      "Explain how the company mitigates sustainability-related risks and seizes opportunities.",
+      "Assess any risks associated with social responsibility and corporate reputation."
+   ],
+   "Health and Pandemic Risks": [
+      "Share how the company responded to global health challenges, such as the COVID-19 pandemic.",
+      "Detail the measures the company has taken to prepare for future health-related risks."
+   ],
+   "Strategic Risks": [
+      "Explain how the company addresses risks associated with shifts in corporate strategy and industry disruptions.",
+      "Detail risks related to the adoption of new technologies or innovation initiatives.",
+      "Share information on risks related to mergers, acquisitions, and post-acquisition integration challenges.",
+      "Assess the risks the company faces when expanding into international markets."
+   ],
+   "Risk Mitigation and Management": [
+      "Describe the strategies and measures the company employs to mitigate identified risks.",
+      "Explain how the company monitors and reports on risks to stakeholders and investors.",
+      "Provide insights into the company's crisis management and response plans for potential risks."
+   ]
+}

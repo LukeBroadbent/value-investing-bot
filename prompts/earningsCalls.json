@@ -1,0 +1,47 @@
+{
+  "Earnings Call and Report Overview": [
+    "Date of the most recent earnings call",
+    "Date of the latest earnings report release",
+    "List of key participants in the earnings call, including executives and analysts",
+    "Summary of the main topics or highlights discussed during the earnings call",
+  ],
+  "Financial Performance": [
+    "Revenue figures and comparisons to expectations and previous periods",
+    "Details about the company's earnings, including earnings per share (EPS)",
+    "Information about profit margins, such as gross margin and operating margin",
+    "Insights into the company's cash flow from operations, investing, and financing activities",
+    "How the balance sheet changed, including assets, liabilities, and equity",
+    "Announcements regarding dividends or share buyback programs"
+  ],
+  "Operational Performance": [
+    "Insights into operational efficiency, cost management, or productivity improvements",
+    "Updates on supply chain management or challenges",
+    "Discussions on customer trends, market share, or customer feedback",
+    "Announcements or discussions of new product or service offerings"
+  ],
+  "Market and Competitive Position": [
+    "Information about the company's market share and competitive positioning",
+    "Discussion of industry trends, market conditions, or emerging opportunities",
+    "Insights into the company's competitive advantages and strategies"
+  ],
+  "Strategic Insights": [
+    "Highlights of strategic initiatives or plans discussed by the company",
+    "Insights into growth strategies, expansion plans, or market entry strategies",
+    "Discussion of the role of innovation and technology in the company's strategy",
+    "Insights into environmental, social, and governance (ESG) initiatives"
+  ],
+  "Outlook and Guidance": [ 
+    "Company's forward-looking guidance or projections for the next quarter or year",
+    "Company's outlook on market and economic conditions",
+    "Any potential risks and challenges highlighted for the company's future"
+  ],
+  "Investor Relations": [
+    "Questions or concerns raised by investors or analysts during the call",
+    "How company management responded to investor and analyst inquiries",
+    "Company's transparency in sharing information and addressing investor concerns"
+  ],
+  "Follow-up Actions": [
+    "Any actions or developments announced following the earnings call",
+    "Availability of investor relations resources, such as transcripts or reports, for further analysis"
+  ]
+}

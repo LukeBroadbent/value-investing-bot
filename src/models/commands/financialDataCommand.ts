@@ -24,6 +24,7 @@ const financialDataCommand = createCommand(
     // calls API to download data
     var yearlyData: Array<FinancialData> = await getFinancialData(symbol);
 
+    // gather value investing numbers to also store
     console.log('Summarizing and Embedding Financial Data for ' + symbol + '...');
     for (const year of yearlyData) {
       const fileName = symbol.toLowerCase() + '-financials-' + year.financial_year + '.json';
@@ -43,7 +44,6 @@ const financialDataCommand = createCommand(
         // Embed and Write to Chroma DB
         await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
       }
-      break
     }
   }
 );

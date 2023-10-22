@@ -30,12 +30,12 @@ const pressReleasesCommand = createCommand(
       if (!doesFileExistInDirectory(symbol, fileName, Directory.Press)) {
         // Write Yearly Financials to File
         var write = await FileReadWriteService.getInstance().savePressReleasesToTextFile(symbol, fileName, release);
+
+        // Embed Press Release File
+        console.log('Embedding Press Releases ' + fileName + '...');
+        await LongTermMemoryService.getInstance().addPressReleaseToLongTermMemory(symbol, fileName);
       }
     }
-
-    // Embed and Write to Chroma DB
-    console.log('Embedding Press Releases for ' + symbol + '...');
-    //await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
   }
 );
 

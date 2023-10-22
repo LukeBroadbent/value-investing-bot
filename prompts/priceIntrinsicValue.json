@@ -1,0 +1,42 @@
+{
+    "Market Valuation": [
+        "Share the current market price of the company's stock.",
+        "Provide the market capitalization of the company based on the current stock price.",
+        "Offer insights into historical stock price trends and performance.",
+        "Compare the company's price-to-earnings (P/E) ratio, price-to-sales (P/S) ratio, or other valuation multiples to industry peers.",
+        "Assess whether the company's stock price has exhibited relative strength compared to its industry or the broader market."
+    ],
+    "Intrinsic Value Assessment": [
+        "Discuss whether there has been a recent DCF analysis to estimate the company's intrinsic value based on future cash flows.",
+        "Provide details of earnings-based valuation methods used, such as the price-to-earnings (P/E) approach.",
+        "Explain how the company's stock price compares to its book value per share.",
+        "If applicable, provide the intrinsic value estimate based on the Dividend Discount Model (DDM) for dividend-paying stocks.",
+        "Share information on asset-based valuation methods, particularly for companies with significant tangible assets.",
+        "Discuss whether the company has been valued using a sum-of-the-parts approach, especially for conglomerates or diversified companies.",
+        "What are the consensus analyst price targets for the company, and how do they compare to the current stock price?"
+    ],
+    "Earnings and Growth Projections": [
+        "Provide the expected earnings growth rates for the company over the next 1-5 years.",
+        "Offer insights into revenue growth expectations and forecasts.",
+        "Assess how the company's actual financial performance aligns with its guidance and analyst expectations.",
+        "Are there discussions on the company's long-term growth prospects and how they influence intrinsic value?"
+    ],
+    "Risk Assessment": [
+        "Share insights into risk factors and their impact on intrinsic value assessments.",
+        "How are market and economic risks factored into the intrinsic value analysis?",
+        "Assess the impact of regulatory and legal risks on intrinsic value.",
+        "What competitive risks or threats may influence intrinsic value?",
+        "Has the company implemented risk mitigation strategies that affect intrinsic value?"
+    ],
+    "Investor Sentiment and Market Conditions": [
+        "Share insights into investor sentiment, market conditions, and their impact on price and valuation.",
+        "What are the key arguments for bullish and bearish cases related to the company's valuation?",
+        "Assess the influence of macroeconomic factors, such as interest rates or inflation, on valuation."
+    ],
+    "Scenario Analysis": [
+        "What is the intrinsic value estimate in a worst-case scenario or under adverse conditions?",
+        "Provide the intrinsic value estimate under normal or expected conditions.",
+        "What is the intrinsic value estimate in a best-case scenario or under highly favorable conditions?",
+        "Share insights into how variations in key assumptions impact intrinsic value estimates."
+    ]
+}

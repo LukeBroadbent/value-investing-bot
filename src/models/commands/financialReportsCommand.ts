@@ -27,8 +27,7 @@ const financialReportsCommand = createCommand(
 
     console.log('Summarizing Financial Reports for ' + symbol + '...');
     for (const report of reports) {
-      
-      var fileName = symbol + '-' + report.year + '-' + report.period + ".txt";
+      var fileName = symbol + '-' + report.year + '-' + report.period + '.txt';
       if (!doesFileExistInDirectory(symbol, fileName, Directory.Reports)) {
         //Gather Important Text from financial report
         var excerts = await getImportantExcertsFromFinancialReport(report.json);
@@ -45,12 +44,10 @@ const financialReportsCommand = createCommand(
 
         // Embed reports and send to db
         console.log('Embedding ' + fileName + '...');
-        await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(excertSummaries)
-
+        await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(excertSummaries);
       }
 
-      break // make sure only 1 file is embedding for testing purposes
-
+      break; // make sure only 1 file is embedding for testing purposes
     }
   }
 );

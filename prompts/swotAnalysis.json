@@ -1,0 +1,50 @@
+{
+    "Strengths": [
+       "What are the company's core strengths and competitive advantages?",
+       "How strong is the company's brand and reputation in the market?",
+       "Does the company have a strong financial position, low debt, or high liquidity?",
+       "Is the company known for its innovation and ability to introduce new products or services?",
+       "Is the company a market leader or dominant player in its industry?",
+       "How loyal are the company's customers, and how does it retain their loyalty?",
+       "Is the company known for operational efficiency and cost management?",
+       "Does the company have a skilled and dedicated workforce?",
+       "Does the company have a strong international presence or global reach?",
+       "Are there valuable strategic partnerships or alliances that boost the company's strengths?"
+    ],
+    "Weaknesses": [
+       "Are there operational inefficiencies or supply chain issues?",
+       "Does the company have significant debt or financial risks?",
+       "Are there leadership or management challenges within the company?",
+       "Are there gaps in the company's product or service offerings?",
+       "Is the company losing market share to competitors?",
+       "Does the company lag in adopting new technologies?",
+       "Are there compliance or regulatory challenges the company faces?",
+       "Does the company struggle with retaining key talent?",
+       "Are there environmental or sustainability weaknesses?",
+       "Are there issues related to product quality or customer service?"
+    ],
+    "Opportunities": [
+       "Are there opportunities for the company to expand into new markets or regions?",
+       "Can the company capitalize on technological advancements and research and development efforts?",
+       "Are there potential acquisitions or mergers that align with the company's strategy?",
+       "How can the company benefit from the growth of e-commerce and digital business?",
+       "Are there opportunities in sustainability or environmental initiatives?",
+       "Can the company tap into emerging or high-growth markets?",
+       "Are there strategic alliances that can drive growth?",
+       "Is there growing demand for the company's products or services?",
+       "Are there government incentives or support that benefit the company?",
+       "Can the company align with changing consumer preferences and trends?"
+    ],
+    "Threats": [
+       "How intense is the competition, and are there disruptive competitors?",
+       "How vulnerable is the company to economic recessions or downturns?",
+       "Are there impending changes in regulations that pose risks?",
+       "How exposed is the company to supply chain disruptions or shortages?",
+       "Are there threats related to data breaches or cyberattacks?",
+       "Is there a risk of market saturation or declining demand?",
+       "How do currency exchange rate fluctuations impact the company?",
+       "What risks exist in terms of natural disasters or environmental events?",
+       "Are there geopolitical tensions or trade conflicts that threaten the company?",
+       "How does the company address health-related threats such as pandemics?"
+    ]
+ }

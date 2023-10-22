@@ -71,10 +71,9 @@ export default class LongTermMemoryService {
   }
 
   async addTranscriptToLongTermMemory(symbol: string, fileName: string): Promise<void> {
-
     var documentLocation = './company/' + symbol + '/transcripts/' + fileName;
     const loader = new TextLoader(documentLocation);
-    const docs = await loader.load()
+    const docs = await loader.load();
 
     // Create vector store and index the docs
     await Chroma.fromDocuments(docs, new OpenAIEmbeddings(), {
@@ -84,7 +83,21 @@ export default class LongTermMemoryService {
         'hnsw:space': 'cosine',
       },
     });
+  }
 
+  async addPressReleaseToLongTermMemory(symbol: string, fileName: string): Promise<void> {
+    var documentLocation = './company/' + symbol + '/press/' + fileName;
+    const loader = new TextLoader(documentLocation);
+    const docs = await loader.load();
+
+    // Create vector store and index the docs
+    await Chroma.fromDocuments(docs, new OpenAIEmbeddings(), {
+      collectionName: VectorStoreName,
+      url: 'http://localhost:8001',
+      collectionMetadata: {
+        'hnsw:space': 'cosine',
+      },
+    });
   }
 
   async queryLongTermMemory(prompt: string) {

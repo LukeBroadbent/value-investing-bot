@@ -1,0 +1,97 @@
+{
+   "Core Business": [
+      "What are {company}'s primary products or services?",
+      "How do these products/services contribute to {company}'s revenue?",
+      "Are there any niche or specialized aspects of {company}'s core business?"
+   ],
+   "History": [
+      "Who founded {company}, and when?",
+      "Key historical milestones?",
+      "What were the initial goals or inspirations behind starting {company}?"
+   ],
+   "Evolution": [
+      "How has {company}'s business model or strategy evolved over time?",
+      "What were the driving factors behind major strategic shifts?",
+      "Were there any notable mergers, acquisitions, or divestitures?"
+   ],
+   "Mission/Vision": [
+      "Can you provide {company}'s mission and vision statements?",
+      "How well have they been aligned with {company}'s actions?",
+      "Have there been changes in the mission or vision over time?"
+   ],
+   "Leadership": [
+      "Founders and key executives' backgrounds?",
+      "What is the current leadership team's experience and expertise?",
+      "Any notable leadership changes in recent years?"
+   ],
+   "Geographic Reach": [
+      "Where does {company} operate? List countries or regions.",
+      "Are there plans for expansion into new geographic areas?",
+      "How important is international business to {company}?"
+   ],
+   "Group Affiliation": [
+      "Part of a larger corporate group or conglomerate? Name the parent company.",
+      "What are the synergies or relationships within the group?",
+      "How does {company} benefit from this affiliation?"
+   ],
+   "Subsidiaries": [
+      "Describe any subsidiaries or affiliated businesses.",
+      "What roles do these subsidiaries play in {company}'s overall strategy?",
+      "Are there plans to acquire or divest subsidiaries?"
+   ],
+   "Structure": [
+      "Outline {company}'s organizational structure, including key divisions.",
+      "How does the structure support its business operations?",
+      "Any changes in {company}'s organizational structure in recent years?"
+   ],
+   "Partnerships": [
+      "Significant partnerships or alliances? Describe them.",
+      "What benefits does {company} derive from these partnerships?",
+      "Have there been any noteworthy partnership terminations?"
+   ],
+   "USP and Brand": [
+      "Unique selling proposition (USP) and brand identity?",
+      "How is the USP communicated to customers?",
+      "Have there been successful rebranding or marketing initiatives?"
+   ],
+   "Revenue Sources": [
+      "Main sources of revenue? Break down by product or service.",
+      "Are there diversification strategies to reduce reliance on any source?",
+      "What is {company}'s pricing strategy?"
+   ],
+   "Major Customers": [
+      "Notable customer relationships? Name key clients, if possible.",
+      "How do these relationships impact the stability and growth of {company}?",
+      "Is there a customer retention strategy in place?"
+   ],
+   "Market Position": [
+      "Rank compared to competitors in terms of market share?",
+      "What specific factors contribute to the competitive advantage of {company}?",
+      "How does {company} differentiate itself in the market?"
+   ],
+   "Public/Private Status": [
+      "Is {company} publicly traded or privately held?",
+      "If public, which stock exchange is {company} listed on?",
+      "How has {company}'s status affected its operations and decision-making?"
+   ],
+   "Market Cap (if public)": [
+      "Current market capitalization of {company}?",
+      "How has the market cap of {company} changed over the last few years?",
+      "Compare the market cap of {company} to peers in the industry."
+   ],
+   "Recent News/Developments": [
+      "Latest news or developments related to {company}?",
+      "How have these developments affected the stock price and reputation of {company}?",
+      "Is there any pending or expected news or events related to {company}?"
+   ],
+   "Legal/Regulatory Issues": [
+      "Ongoing legal or regulatory matters related to {company}? Describe them.",
+      "What potential impact do these issues have on the finances and operations of {company}?",
+      "How is {company} addressing compliance and legal challenges?"
+   ],
+   "CSR/Sustainability": [
+      "CSR and sustainability approach of {company}?",
+      "Specific initiatives related to environmental, social, and governance (ESG) goals by {company}?",
+      "Any notable awards or recognitions for CSR efforts by {company}?"
+   ]
+}

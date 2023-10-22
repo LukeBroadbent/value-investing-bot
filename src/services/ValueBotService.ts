@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 
 // Langchain Imports
 import { LLMChain } from 'langchain/chains';
-import { OpenAIChat } from 'langchain/llms/openai';
+import { ChatOpenAI } from 'langchain/chat_models/openai';
 import { CallbackManager } from 'langchain/callbacks';
 import { ChatPromptTemplate, HumanMessagePromptTemplate, SystemMessagePromptTemplate } from 'langchain/prompts';
 import { BufferWindowMemory } from 'langchain/memory';
@@ -20,12 +20,6 @@ const callbackManager = CallbackManager.fromHandlers({
     // Write the token to the output stream (i.e., the console)
     output.write(token);
   },
-});
-
-const llm = new OpenAIChat({
-  streaming: true,
-  callbackManager,
-  modelName: 'gpt-4',
 });
 
 const currentModulePath = fileURLToPath(import.meta.url);
@@ -50,12 +44,6 @@ const bufferWindowMemory = new BufferWindowMemory({
   k: 2,
 });
 
-const chain = new LLMChain({
-  prompt: chatPrompt,
-  memory: bufferWindowMemory,
-  llm,
-});
-
 export default class ValueBotService {
   private static _instance: ValueBotService = new ValueBotService();
 
@@ -71,6 +59,19 @@ export default class ValueBotService {
   }
 
   async queryAll(question: string, history: string, context: string) {
+    const chat = new ChatOpenAI({
+      temperature: 0,
+      callbacks: callbackManager,
+      streaming: true,
+      modelName: 'gpt-3.5-turbo',
+    });
+
+    const chain = new LLMChain({
+      prompt: chatPrompt,
+      llm: chat,
+      memory: bufferWindowMemory,
+    });
+
     return await chain.call({
       input: question,
       context,

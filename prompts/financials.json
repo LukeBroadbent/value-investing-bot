@@ -1,0 +1,70 @@
+{
+  "Balance Sheet": [
+    "Date of the most recent balance sheet",
+    "Total value of the company's assets",
+    "Total value of the company's liabilities",
+    "Total value of the company's equity",
+    "Description of significant assets and liabilities",
+    "How the composition of assets and liabilities has changed over the past few years"
+  ],
+  "Income Statement": [
+    "Date of the most recent income statement",
+    "Total revenues and expenses",
+    "Major sources of revenue and their changes over time",
+    "Analysis of the cost structure and profitability"
+  ],
+  "Cash Flow Statement": [
+    "Date of the most recent cash flow statement",
+    "Amount of cash generated from operating, investing, and financing activities",
+    "Significant cash flow fluctuations or trends",
+    "Assessment of the company's liquidity and cash generation"
+  ],
+  "Financial Ratios": [
+    "Value of the current ratio",
+    "Value of the quick ratio",
+    "Value of the debt-to-equity ratio",
+    "Value of the return on equity (ROE)",
+    "What these ratios reveal about the company's financial health and performance",
+    "Comparison of the ratios to industry averages or historical data"
+  ],
+  "Revenue Breakdown": [
+    "Revenue breakdown by product or service categories",
+    "Significant changes in revenue streams and their drivers",
+    "Company's plans for diversifying or growing revenue sources"
+  ],
+  "Cost and Expense Analysis": [
+    "Analysis of the company's major costs and expenses",
+    "Cost-saving or efficiency measures in place",
+    "How costs have evolved in relation to revenue over the years",
+    "Impact of inflation or other cost pressures"
+  ],
+  "Capital Expenditures (CapEx)": [
+    "Overview of the company's recent capital expenditures",
+    "Focus of these investments and alignment with growth strategy",
+    "Plans for significant capital expenditures in the near future"
+  ],
+  "Debt and Financing": [
+    "Details about the company's outstanding debt, including types and amounts",
+    "How the company manages its debt, interest rates, and repayment terms",
+    "Financing strategies in place for future growth or acquisitions"
+  ],
+  "Dividends and Share Buybacks": [
+    "Information on the company's dividend history and policies",
+    "Extent to which the company has engaged in share buyback programs",
+    "How dividend policies and share buybacks align with the company's financial goals"
+  ],
+  "Auditor's Reports": [
+    "Relevant information from the auditor's reports, findings, or concerns",
+    "Changes in audit opinions or findings in recent years",
+    "Any pending or resolved issues related to financial reporting"
+  ],
+  "Forecast and Guidance": [
+    "Any financial forecasts or guidance issued by the company",
+    "Company's anticipated financial performance in the near future",
+    "Assumptions or key drivers influencing these forecasts"
+  ],
+  "Significant Accounting Policies": [
+    "Explanation of the company's accounting policies, particularly those impacting financial statements",
+    "Changes in accounting policies or standards affecting financial reporting"
+  ]
+}
