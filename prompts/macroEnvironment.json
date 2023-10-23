@@ -1,34 +1,34 @@
 {
     "Economic Conditions": [
-       "How do macroeconomic factors, such as GDP growth, inflation rates, and interest rates, impact the company's financial performance?",
+       "How do macroeconomic factors, such as GDP growth, inflation rates, and interest rates, impact {company}'s financial performance?",
        "Is the company sensitive to economic cycles, and how does it navigate economic downturns or upturns?"
     ],
     "Industry and Market Trends": [
        "Describe the current trends in the industry or market in which the company operates.",
-       "How do these trends affect the company's competitiveness and strategic decisions?"
+       "How do these trends affect {company}'s competitiveness and strategic decisions?"
     ],
     "Regulatory and Legal Environment": [
-       "How do changes in regulatory and legal environments impact the company's operations and compliance requirements?",
-       "Are there specific regulations or legislation that significantly affect the company's business?"
+       "How do changes in regulatory and legal environments impact {company}'s operations and compliance requirements?",
+       "Are there specific regulations or legislation that significantly affect {company}'s business?"
     ],
     "Political and Geopolitical Risks": [
-       "Assess the political and geopolitical risks that may influence the company's international operations.",
+       "Assess the political and geopolitical risks that may influence {company}'s international operations.",
        "How does the company manage political uncertainties and global events?"
     ],
     "Trade and Tariffs": [
-       "How are trade policies, tariffs, and international trade agreements affecting the company's supply chain and global trade activities?",
+       "How are trade policies, tariffs, and international trade agreements affecting {company}'s supply chain and global trade activities?",
        "Are there concerns related to trade disputes or restrictions?"
     ],
     "Environmental and Sustainability Factors": [
-       "How do environmental regulations and sustainability trends impact the company's operations and product offerings?",
+       "How do environmental regulations and sustainability trends impact {company}'s operations and product offerings?",
        "Are there efforts to align with sustainable practices?"
     ],
     "Technological Advancements": [
-       "How does the rapid pace of technological change influence the company's products, services, and competitiveness?",
+       "How does the rapid pace of technological change influence {company}'s products, services, and competitiveness?",
        "Is the company actively adopting and innovating with new technologies?"
     ],
     "Social and Demographic Shifts": [
-       "How do changes in demographics and societal preferences impact the company's target markets and customer behavior?",
+       "How do changes in demographics and societal preferences impact {company}'s target markets and customer behavior?",
        "Is the company adjusting its strategies to align with these shifts?"
     ],
     "Labor and Workforce Trends": [
@@ -36,11 +36,11 @@
        "How does the company attract and retain talent in response to these trends?"
     ],
     "Cultural and Consumer Preferences": [
-       "How do shifts in consumer culture and preferences affect the company's product development and marketing strategies?",
+       "How do shifts in consumer culture and preferences affect {company}'s product development and marketing strategies?",
        "Is the company responsive to changing customer demands?"
     ],
     "Currency Exchange Rates": [
-       "How do currency exchange rate fluctuations impact the company's financial performance, particularly for international operations?",
+       "How do currency exchange rate fluctuations impact {company}'s financial performance, particularly for international operations?",
        "Are there strategies in place to mitigate currency risks?"
     ],
     "Commodity Price Volatility": [
@@ -48,8 +48,8 @@
        "Is the company prepared for price fluctuations?"
     ],
     "Energy and Sustainability Initiatives": [
-       "Share information about the company's energy consumption and sustainability initiatives.",
-       "How do energy prices and sustainability efforts impact the company's operations?"
+       "Share information about {company}'s energy consumption and sustainability initiatives.",
+       "How do energy prices and sustainability efforts impact {company}'s operations?"
     ],
     "Global Health and Pandemics": [
        "How did the company respond to global health challenges like the COVID-19 pandemic?",

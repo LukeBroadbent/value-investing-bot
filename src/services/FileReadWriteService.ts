@@ -21,7 +21,7 @@ const FILEPATH_TRANSCRIPTS = '\\transcripts\\';
 const FILEPATH_FINANCIALS = '\\financials\\';
 const FILEPATH_NEWS = '\\news\\';
 const FILEPATH_PRESS = '\\press\\';
-const FILEPATH_BUSINESS_REPORT = FILEPATH + '\\business\\';
+const FILEPATH_PROMPTS = FILEPATH + '\\prompts\\';
 
 export default class FileReadWriteService {
   private static _instance: FileReadWriteService = new FileReadWriteService();
@@ -179,6 +179,11 @@ export default class FileReadWriteService {
         });
       }
     });
+  }
+
+  public readPromptsFromFile(fileName: string) {
+    var jsonString = fs.readFileSync(FILEPATH_PROMPTS + fileName, 'utf-8');
+    return jsonString
   }
 }
 

@@ -1,12 +1,12 @@
 {
     "Industry Description": [
-        "What industry or sector does the company operate in?",
+        "What industry or sector does {company} operate in?",
         "Provide an overview of the industry's size and growth prospects.",
         "What are the main drivers of growth in this industry?"
     ],
     "Competitive Landscape": [
-        "Who are the primary competitors of the company within its industry?",
-        "What is the market share of the company compared to its competitors?",
+        "Who are the primary competitors of {company} within its industry?",
+        "What is the market share of {company} compared to its competitors?",
         "Are there any emerging or disruptive competitors to watch?"
     ],
     "Market Trends": [
@@ -15,55 +15,55 @@
         "Are there technology or regulatory trends affecting the industry?"
     ],
     "Market Position": [
-        "How does the company position itself within the market?",
+        "How does {company} position itself within the market?",
         "Does it target specific customer segments, regions, or niches?",
-        "What is the company's unique value proposition or competitive advantage?"
+        "What is {company}'s unique value proposition or competitive advantage?"
     ],
     "Growth Opportunities": [
-        "What growth opportunities exist within the industry, and how is the company pursuing them?",
-        "Are there potential markets or product extensions the company is exploring?",
-        "How does the company plan to capitalize on emerging opportunities?"
+        "What growth opportunities exist within the industry, and how is {company} pursuing them?",
+        "Are there potential markets or product extensions {company} is exploring?",
+        "How does {company} plan to capitalize on emerging opportunities?"
     ],
     "Risks and Challenges": [
         "What are the major risks and challenges the industry faces?",
-        "How do these risks impact the company's operations and profitability?",
-        "Is the company adequately mitigating these risks?"
+        "How do these risks impact {company}'s operations and profitability?",
+        "Is {company} adequately mitigating these risks?"
     ],
     "Regulatory Environment": [
         "What regulatory or legal factors affect the industry?",
-        "How does the company comply with relevant regulations and standards?",
+        "How does {company} comply with relevant regulations and standards?",
         "Are there pending or potential regulatory changes that could impact the business?"
     ],
     "Economic Factors": [
         "How do macroeconomic factors such as interest rates, inflation, and currency exchange rates affect the industry?",
-        "Is the company exposed to economic cyclicality, and how does it manage this?"
+        "Is {company} exposed to economic cyclicality, and how does it manage this?"
     ],
     "SWOT Analysis": [
-        "Conduct a SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for the company within its industry.",
+        "Conduct a SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for {company} within its industry.",
         "Identify key internal strengths and weaknesses, as well as external opportunities and threats."
     ],
     "Industry News and Events": [
-        "How do these industry events impact the company's strategy and operations?"
+        "How do these industry events impact {company}'s strategy and operations?"
     ],
     "Mergers and Acquisitions": [
-        "Has the company been involved in any recent mergers, acquisitions, or divestitures?",
-        "How have these transactions impacted the company's market position and growth potential?"
+        "Has {company} been involved in any recent mergers, acquisitions, or divestitures?",
+        "How have these transactions impacted {company}'s market position and growth potential?"
     ],
     "Customer Demographics": [
         "Who are the primary customers or clients within the industry?",
-        "Are there specific demographics or behaviors that the company targets?",
-        "How does the company build and maintain relationships with its customers?"
+        "Are there specific demographics or behaviors that {company} targets?",
+        "How does {company} build and maintain relationships with its customers?"
     ],
     "Supply Chain and Distribution": [
-        "Describe the company's supply chain and distribution networks within the industry.",
-        "How does the company manage logistics and ensure the availability of products or services?"
+        "Describe {company}'s supply chain and distribution networks within the industry.",
+        "How does {company} manage logistics and ensure the availability of products or services?"
     ],
     "Technological Advancements": [
-        "How does technology impact the industry, and how is the company adopting or innovating within this context?",
+        "How does technology impact the industry, and how is {company} adopting or innovating within this context?",
         "Are there specific tech-driven trends that provide growth opportunities or threats?"
     ],
     "Sustainability and ESG": [
         "Assess how environmental, social, and governance (ESG) factors influence the industry.",
-        "What sustainability initiatives or practices has the company adopted?"
+        "What sustainability initiatives or practices has {company} adopted?"
     ]
 }

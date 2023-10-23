@@ -1,47 +1,47 @@
 {
     "Financial Performance": [
-        "Provide information about the company's revenue growth trend over the past five years.",
-        "Explain how the company's profitability has evolved, and share key profitability metrics such as operating margin and net income.",
-        "Share historical data on the company's earnings per share (EPS) and its growth.",
-        "Analyze the historical trends in the company's cash flow from operations, investing, and financing activities.",
-        "Share information about changes in the company's balance sheet, including assets, liabilities, and equity over time.",
-        "How has the company managed its debt levels, and what is the historical trend in debt-to-equity ratios?",
+        "Provide information about {company}'s revenue growth trend over the past five years.",
+        "Explain how {company}'s profitability has evolved, and share key profitability metrics such as operating margin and net income.",
+        "Share historical data on {company}'s earnings per share (EPS) and its growth.",
+        "Analyze the historical trends in {company}'s cash flow from operations, investing, and financing activities.",
+        "Share information about changes in {company}'s balance sheet, including assets, liabilities, and equity over time.",
+        "How has {company} managed its debt levels, and what is the historical trend in debt-to-equity ratios?",
         "Provide a history of dividend payments, including dividend yield and growth rates.",
-        "Describe the company's historical share buyback programs and their impact on the share count."
+        "Describe {company}'s historical share buyback programs and their impact on the share count."
     ],
     "Market and Stock Performance": [
-        "Analyze the historical trends in the company's stock price, including all-time highs and lows.",
-        "How has the company's market capitalization changed over time?",
+        "Analyze the historical trends in {company}'s stock price, including all-time highs and lows.",
+        "How has {company}'s market capitalization changed over time?",
         "What has been the historical TSR, including stock price appreciation and dividends, for shareholders?",
         "Mention any historical stock splits or additional stock offerings.",
         "Share historical data on analyst recommendations and price targets."
     ],
     "Operational Performance": [
         "Share historical data on production or sales volumes, if applicable to the industry.",
-        "How has the company's supply chain and sourcing evolved over the years?",
-        "Analyze changes in the customer base and the company's market share.",
-        "Describe how the company's product or service portfolio has changed historically.",
+        "How has {company}'s supply chain and sourcing evolved over the years?",
+        "Analyze changes in the customer base and {company}'s market share.",
+        "Describe how {company}'s product or service portfolio has changed historically.",
         "Provide information on the historical expansion into new geographic markets."
     ],
     "Mergers and Acquisitions": [
         "Share details of any historical mergers, acquisitions, or divestitures.",
-        "Explain how these M&A activities impacted the company's growth and market position."
+        "Explain how these M&A activities impacted {company}'s growth and market position."
     ],
     "Leadership and Management": [
         "Mention historical changes in top leadership, including CEOs and other key executives.",
-        "How has the company's corporate strategy evolved over the years?",
-        "Provide insights into the company's historical innovations or R&D efforts."
+        "How has {company}'s corporate strategy evolved over the years?",
+        "Provide insights into {company}'s historical innovations or R&D efforts."
     ],
     "Regulatory and Compliance History": [
-        "Share information on any historical regulatory or compliance challenges the company faced.",
-        "Explain how these challenges were resolved and their impact on the company."
+        "Share information on any historical regulatory or compliance challenges {company} faced.",
+        "Explain how these challenges were resolved and their impact on {company}."
     ],
     "Environmental and Social Responsibility": [
-        "Describe the company's historical environmental sustainability initiatives.",
-        "How have the company's social responsibility efforts evolved over time?"
+        "Describe {company}'s historical environmental sustainability initiatives.",
+        "How have {company}'s social responsibility efforts evolved over time?"
     ],
     "Industry and Market Conditions": [
-        "Assess how the company fared during economic cycles and industry downturns.",
-        "Share insights into how the company adapted to industry and market trends over time."
+        "Assess how {company} fared during economic cycles and industry downturns.",
+        "Share insights into how {company} adapted to industry and market trends over time."
     ]
 }

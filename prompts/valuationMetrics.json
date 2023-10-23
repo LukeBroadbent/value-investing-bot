@@ -1,61 +1,61 @@
 {
     "Market Capitalization (Market Cap)": [
-       "What is the current market capitalization of the company?",
+       "What is the current market capitalization of {company}?",
        "How has the market cap changed over the past year, and what factors influenced these changes?",
-       "How does the company's market cap compare to its industry peers?"
+       "How does {company}'s market cap compare to its industry peers?"
     ],
     "Price-to-Earnings Ratio (P/E)": [
-       "What is the company's current P/E ratio?",
+       "What is {company}'s current P/E ratio?",
        "Is the P/E ratio higher or lower than industry averages, and what does this indicate?",
        "Are there specific factors affecting the P/E ratio, such as growth prospects or earnings stability?"
     ],
     "Price-to-Sales Ratio (P/S)": [
-       "Provide the company's current P/S ratio. How does this metric compare to industry standards?",
+       "Provide {company}'s current P/S ratio. How does this metric compare to industry standards?",
        "What insights can be derived from the P/S ratio, and how has it evolved over time?",
        "Are there market trends affecting P/S ratios for companies in the same sector?"
     ],
     "Price-to-Book Ratio (P/B)": [
-       "Share the company's current P/B ratio. How does it reflect the market's view of the company's book value?",
+       "Share {company}'s current P/B ratio. How does it reflect the market's view of {company}'s book value?",
        "Are there specific assets or liabilities that significantly impact the P/B ratio?",
        "How does the P/B ratio compare to historical levels and industry benchmarks?"
     ],
     "Dividend Yield": [
-       "Provide the company's current dividend yield. How does it compare to the market or sector average?",
-       "What is the company's dividend policy, and how does it align with investor expectations?",
+       "Provide {company}'s current dividend yield. How does it compare to the market or sector average?",
+       "What is {company}'s dividend policy, and how does it align with investor expectations?",
        "Are there changes in dividend payments or policies over time?"
     ],
     "Earnings Per Share (EPS)": [
-       "Share the company's most recent EPS figures.",
+       "Share {company}'s most recent EPS figures.",
        "How have earnings per share changed over the past few years, and what contributed to these changes?",
        "Are there forecasts or guidance related to future EPS growth?"
     ],
     "Free Cash Flow (FCF)": [
-       "Provide information on the company's free cash flow.",
-       "How does the company utilize its free cash flow, and what investments or initiatives does it fund?",
+       "Provide information on {company}'s free cash flow.",
+       "How does {company} utilize its free cash flow, and what investments or initiatives does it fund?",
        "Are there variations in free cash flow that impact valuation metrics?"
     ],
     "Enterprise Value (EV)": [
-       "What is the enterprise value of the company, and how is it calculated?",
-       "How does the company's EV compare to its market capitalization, and what does this signify?",
+       "What is the enterprise value of {company}, and how is it calculated?",
+       "How does {company}'s EV compare to its market capitalization, and what does this signify?",
        "Are there liabilities or non-operating assets impacting the EV?"
     ],
     "Debt-to-Equity Ratio": [
-       "Share the company's current debt-to-equity ratio.",
-       "How does the company manage its debt levels, and what is the impact on valuation?",
+       "Share {company}'s current debt-to-equity ratio.",
+       "How does {company} manage its debt levels, and what is the impact on valuation?",
        "Are there plans to alter the debt-to-equity ratio in the future?"
     ],
     "Discounted Cash Flow (DCF) Analysis": [
-       "Has a DCF analysis been conducted for the company's valuation?",
+       "Has a DCF analysis been conducted for {company}'s valuation?",
        "What are the key assumptions and parameters used in the DCF model?",
-       "What is the estimated intrinsic value of the company based on the DCF analysis?"
+       "What is the estimated intrinsic value of {company} based on the DCF analysis?"
     ],
     "Comparable Company Analysis (Comps)": [
        "Have comparable company analyses been performed for valuation?",
        "What are the key companies used for comparison, and how do they impact the valuation metrics?",
-       "Are there any notable variations between the company's metrics and those of its peers?"
+       "Are there any notable variations between {company}'s metrics and those of its peers?"
     ],
     "Market Sentiment and Analyst Recommendations": [
-       "What is the current market sentiment and consensus analyst recommendations for the company's stock?",
+       "What is the current market sentiment and consensus analyst recommendations for {company}'s stock?",
        "How do these recommendations influence investor perceptions and valuation?"
     ]
  }

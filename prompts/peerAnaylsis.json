@@ -1,27 +1,27 @@
 {
    "Identify Industry Peers": [
-      "Who are the primary industry peers or competitors of the company?"
+      "Who are the primary industry peers or competitors of {company}?"
    ],
    "Selection Criteria": [
       "What criteria were used to select these peers for the analysis?"
    ],
    "Revenue Comparison": [
-      "Compare the company's revenue to that of its peers. Is the company a revenue leader or laggard in the industry?"
+      "Compare {company}'s revenue to that of its peers. Is {company} a revenue leader or laggard in the industry?"
    ],
    "Profitability Metrics": [
-      "Analyze the company's profitability metrics (e.g., profit margins, net income) in comparison to peers."
+      "Analyze {company}'s profitability metrics (e.g., profit margins, net income) in comparison to peers."
    ],
    "Growth Rates": [
-      "Assess the company's growth rates (e.g., revenue growth, earnings growth) relative to its peers."
+      "Assess {company}'s growth rates (e.g., revenue growth, earnings growth) relative to its peers."
    ],
    "Market Capitalization": [
-      "How does the company's market capitalization compare to its peers?"
+      "How does {company}'s market capitalization compare to its peers?"
    ],
    "Operational Efficiency": [
       "Analyze operational efficiency metrics, such as inventory turnover, asset utilization, and return on assets, compared to peers."
    ],
    "Supply Chain and Production": [
-      "How does the company's supply chain and production efficiency compare to peers?"
+      "How does {company}'s supply chain and production efficiency compare to peers?"
    ],
    "Research and Development": [
       "Compare R&D investments and innovation efforts with those of peers."
@@ -30,58 +30,58 @@
       "Assess customer satisfaction and loyalty relative to industry peers."
    ],
    "Debt and Liquidity": [
-      "Analyze the company's debt levels, liquidity, and solvency in comparison to its peers."
+      "Analyze {company}'s debt levels, liquidity, and solvency in comparison to its peers."
    ],
    "Cash Flow Management": [
-      "How effectively does the company manage cash flows in comparison to peers?"
+      "How effectively does {company} manage cash flows in comparison to peers?"
    ],
    "Dividend Yield": [
-      "Compare the company's dividend yield to that of industry peers."
+      "Compare {company}'s dividend yield to that of industry peers."
    ],
    "Capital Allocation": [
-      "How does the company allocate capital, and how does this compare to peers?"
+      "How does {company} allocate capital, and how does this compare to peers?"
    ],
    "Market Share": [
-      "Analyze the company's market share relative to its peers."
+      "Analyze {company}'s market share relative to its peers."
    ],
    "Competitive Advantage": [
-      "What competitive advantages or disadvantages does the company have compared to peers?"
+      "What competitive advantages or disadvantages does {company} have compared to peers?"
    ],
    "Innovation and Technology Leadership": [
-      "Compare the company's innovation and technology leadership in the industry."
+      "Compare {company}'s innovation and technology leadership in the industry."
    ],
    "Regulatory Compliance": [
-      "Assess how the company complies with industry-specific regulations compared to peers."
+      "Assess how {company} complies with industry-specific regulations compared to peers."
    ],
    "Legal Challenges": [
-      "Analyze any legal challenges, litigation, or regulatory fines faced by the company and peers."
+      "Analyze any legal challenges, litigation, or regulatory fines faced by {company} and peers."
    ],
    "Sustainability Initiatives": [
-      "Compare the company's environmental sustainability efforts with those of its peers."
+      "Compare {company}'s environmental sustainability efforts with those of its peers."
    ],
    "Social Responsibility": [
-      "How does the company's social responsibility initiatives align with those of its peers?"
+      "How does {company}'s social responsibility initiatives align with those of its peers?"
    ],
    "Alignment with Market Trends": [
-      "To what extent does the company align with current industry trends compared to peers?"
+      "To what extent does {company} align with current industry trends compared to peers?"
    ],
    "Customer Feedback": [
       "Consider customer feedback, reviews, and satisfaction in relation to peers."
    ],
    "Stock Price Performance": [
-      "Analyze the company's stock price performance and market valuation relative to peers."
+      "Analyze {company}'s stock price performance and market valuation relative to peers."
    ],
    "Dividend and Share Buyback Programs": [
-      "Compare the company's dividend and share buyback policies with those of peers."
+      "Compare {company}'s dividend and share buyback policies with those of peers."
    ],
    "Risk Exposure": [
-      "Evaluate the company's exposure to market risks, operational risks, and other vulnerabilities in comparison to peers."
+      "Evaluate {company}'s exposure to market risks, operational risks, and other vulnerabilities in comparison to peers."
    ],
    "Resilience and Crisis Management": [
-      "Assess the company's resilience and crisis management strategies compared to peers."
+      "Assess {company}'s resilience and crisis management strategies compared to peers."
    ],
    "Board Composition": [
-      "Analyze the composition of the company's board of directors in comparison to peers."
+      "Analyze the composition of {company}'s board of directors in comparison to peers."
    ],
    "Leadership and Executive Compensation": [
       "Compare executive compensation and leadership practices with peers."

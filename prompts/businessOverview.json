@@ -14,7 +14,7 @@
       "What were the driving factors behind major strategic shifts?",
       "Were there any notable mergers, acquisitions, or divestitures?"
    ],
-   "Mission/Vision": [
+   "Mission Vision": [
       "Can you provide {company}'s mission and vision statements?",
       "How well have they been aligned with {company}'s actions?",
       "Have there been changes in the mission or vision over time?"
@@ -49,7 +49,7 @@
       "What benefits does {company} derive from these partnerships?",
       "Have there been any noteworthy partnership terminations?"
    ],
-   "USP and Brand": [
+   "USP And Brand": [
       "Unique selling proposition (USP) and brand identity?",
       "How is the USP communicated to customers?",
       "Have there been successful rebranding or marketing initiatives?"
@@ -74,22 +74,22 @@
       "If public, which stock exchange is {company} listed on?",
       "How has {company}'s status affected its operations and decision-making?"
    ],
-   "Market Cap (if public)": [
+   "Market Cap": [
       "Current market capitalization of {company}?",
       "How has the market cap of {company} changed over the last few years?",
       "Compare the market cap of {company} to peers in the industry."
    ],
-   "Recent News/Developments": [
+   "Recent News Developments": [
       "Latest news or developments related to {company}?",
       "How have these developments affected the stock price and reputation of {company}?",
       "Is there any pending or expected news or events related to {company}?"
    ],
-   "Legal/Regulatory Issues": [
+   "Legal Regulatory Issues": [
       "Ongoing legal or regulatory matters related to {company}? Describe them.",
       "What potential impact do these issues have on the finances and operations of {company}?",
       "How is {company} addressing compliance and legal challenges?"
    ],
-   "CSR/Sustainability": [
+   "CSR and Sustainability": [
       "CSR and sustainability approach of {company}?",
       "Specific initiatives related to environmental, social, and governance (ESG) goals by {company}?",
       "Any notable awards or recognitions for CSR efforts by {company}?"

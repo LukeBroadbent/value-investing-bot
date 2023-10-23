@@ -1,12 +1,12 @@
 {
     "Recent News Sources": [
-       "What are the primary sources of news and events related to the company?"
+       "What are the primary sources of news and events related to {company}?"
     ],
     "Relevance and Impact": [
-       "Assess the relevance and impact of recent news and events on the company."
+       "Assess the relevance and impact of recent news and events on {company}."
     ],
     "Financial Performance": [
-       "Has there been recent news regarding the company's financial results, such as earnings, revenue, or profit?"
+       "Has there been recent news regarding {company}'s financial results, such as earnings, revenue, or profit?"
     ],
     "Stock Market Activity": [
        "Share information about recent stock price movements, trading volumes, or market capitalization changes."
@@ -21,7 +21,7 @@
        "Were there any recent news regarding mergers, acquisitions, or divestitures?"
     ],
     "Product or Service Launches": [
-       "Has the company recently launched new products or services?"
+       "Has {company} recently launched new products or services?"
     ],
     "Supply Chain and Production Updates": [
        "Share information about supply chain disruptions, sourcing changes, or production issues."
@@ -33,7 +33,7 @@
        "Share any news regarding innovation, technology advancements, or R&D initiatives."
     ],
     "Market Trends": [
-       "Share information about recent industry trends and how the company is positioned within those trends."
+       "Share information about recent industry trends and how {company} is positioned within those trends."
     ],
     "Competitive Landscape": [
        "Has there been news related to competitors or changes in the competitive landscape?"
@@ -42,7 +42,7 @@
        "Were there regulatory changes or compliance updates impacting the industry or company?"
     ],
     "Market Expansion and International News": [
-       "Share insights into the company's expansion into new markets or international developments."
+       "Share insights into {company}'s expansion into new markets or international developments."
     ],
     "Sustainability Initiatives": [
        "Provide updates on environmental sustainability efforts and initiatives."
@@ -57,25 +57,25 @@
        "Share information on recent executive appointments or departures."
     ],
     "Board Changes": [
-       "Were there changes in the composition of the company's board of directors?"
+       "Were there changes in the composition of {company}'s board of directors?"
     ],
     "Corporate Governance Updates": [
        "Share insights into corporate governance changes or updates."
     ],
     "Crisis Response": [
-       "How has the company responded to recent crises or challenges, such as the COVID-19 pandemic?"
+       "How has {company} responded to recent crises or challenges, such as the COVID-19 pandemic?"
     ],
     "Risk Management Strategies": [
        "Share insights into risk management and mitigation strategies."
     ],
     "Reputation Management": [
-       "Assess the company's efforts to manage its reputation and public perception."
+       "Assess {company}'s efforts to manage its reputation and public perception."
     ],
     "Stakeholder Engagement": [
-       "Share insights into how the company engages with stakeholders, including customers, employees, and investors."
+       "Share insights into how {company} engages with stakeholders, including customers, employees, and investors."
     ],
     "Environmental Reporting": [
-       "Share information about the company's environmental performance and disclosures."
+       "Share information about {company}'s environmental performance and disclosures."
     ],
     "Social Responsibility Reporting": [
        "Were there recent reports or disclosures related to social responsibility?"
@@ -87,6 +87,6 @@
        "Share information on the date of the next earnings call and what to expect."
     ],
     "Investor Meetings and Conferences": [
-       "Are there upcoming investor meetings, conferences, or events that are relevant to the company?"
+       "Are there upcoming investor meetings, conferences, or events that are relevant to {company}?"
     ]
  }
