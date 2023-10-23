@@ -52,4 +52,4 @@ const commandHandler: CommandHandler = createCommandHandler();
 //   output.write('\n');
 // }
 
-generateBusinessOverviewReport()
+generateBusinessOverviewReport("Paypal")
