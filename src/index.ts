@@ -22,35 +22,37 @@ const commandHandler: CommandHandler = createCommandHandler();
 //LongTermMemoryService.getInstance().deleteCollection()
 //LongTermMemoryService.getInstance().addFinancialReportToLongTermMemory("pypl", "PYPL-2022-FY.txt")
 
-while (true) {
-  const userInput = await ask(chalk.green('\nStart chatting or type /help for a list of commands\n'));
-  var response;
+// while (true) {
+//   const userInput = await ask(chalk.green('\nStart chatting or type /help for a list of commands\n'));
+//   var response;
 
-  if (userInput.startsWith('/')) {
-    const [command, ...args] = userInput.slice(1).split(' ');
-    await commandHandler.execute(command, args, output);
-  } else {
-    const question = sanitizeInput(userInput);
-    const history = await ShortTermMemoryService.getInstance().queryShortTermMemory(question);
-    const context = await LongTermMemoryService.getInstance().queryLongTermMemory(question);
-    try {
-      response = await ValueBotService.getInstance().queryAll(question, history, context);
-      if (response) {
-        await ShortTermMemoryService.getInstance().addDocumentsToMemoryVectorStore([
-          { content: question, metadataType: 'question' },
-          { content: response?.text, metadataType: 'answer' },
-        ]);
-        //await logChat(chatLogDirectory, question, response.response);
-      }
-    } catch (error) {
-      if (error instanceof Error && error.message.includes('Cancel:')) {
-      } else if (error instanceof Error) {
-        output.write(chalk.red(error.message));
-      } else {
-        output.write(chalk.red(error));
-      }
-    }
-  }
+//   if (userInput.startsWith('/')) {
+//     const [command, ...args] = userInput.slice(1).split(' ');
+//     await commandHandler.execute(command, args, output);
+//   } else {
+//     const question = sanitizeInput(userInput);
+//     const history = await ShortTermMemoryService.getInstance().queryShortTermMemory(question);
+//     const context = await LongTermMemoryService.getInstance().queryLongTermMemory(question);
+//     try {
+//       response = await ValueBotService.getInstance().queryAll(question, history, context);
+//       if (response) {
+//         await ShortTermMemoryService.getInstance().addDocumentsToMemoryVectorStore([
+//           { content: question, metadataType: 'question' },
+//           { content: response?.text, metadataType: 'answer' },
+//         ]);
+//         //await logChat(chatLogDirectory, question, response.response);
+//       }
+//     } catch (error) {
+//       if (error instanceof Error && error.message.includes('Cancel:')) {
+//       } else if (error instanceof Error) {
+//         output.write(chalk.red(error.message));
+//       } else {
+//         output.write(chalk.red(error));
+//       }
+//     }
+//   }
 
-  output.write('\n');
-}
+//   output.write('\n');
+// }
+
+generateBusinessOverviewReport('Paypal');

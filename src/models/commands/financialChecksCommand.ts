@@ -107,10 +107,8 @@ const financialChecksCommand = createCommand(
       symbol + '_currentRatio_all_' + JSON.stringify(currentRatio),
     ];
 
-    console.log(stringsToEmbed);
-
     // Embed and Write to Chroma DB
-    //await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
+    await LongTermMemoryService.getInstance().addFinancialDataToLongTermMemory(stringsToEmbed);
   }
 );
 
