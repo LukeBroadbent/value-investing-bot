@@ -183,7 +183,7 @@ export default class FileReadWriteService {
 
   public readPromptsFromFile(fileName: string) {
     var jsonString = fs.readFileSync(FILEPATH_PROMPTS + fileName, 'utf-8');
-    return jsonString
+    return jsonString;
   }
 }
 

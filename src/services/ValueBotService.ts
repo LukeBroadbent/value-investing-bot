@@ -13,12 +13,14 @@ import { ChatOpenAI } from 'langchain/chat_models/openai';
 import { CallbackManager } from 'langchain/callbacks';
 import { ChatPromptTemplate, HumanMessagePromptTemplate, SystemMessagePromptTemplate } from 'langchain/prompts';
 import { BufferWindowMemory } from 'langchain/memory';
+import ShortTermMemoryService from './ShortTermMemoryService.js';
+import LongTermMemoryService from './LongTermMemoryService.js';
 
 const callbackManager = CallbackManager.fromHandlers({
   // This function is called when the LLM generates a new token (i.e., a prediction for the next word)
   async handleLLMNewToken(token: string) {
     // Write the token to the output stream (i.e., the console)
-    output.write(token);
+    //output.write(token);
   },
 });
 
@@ -78,5 +80,29 @@ export default class ValueBotService {
       history,
       immediate_history: bufferWindowMemory,
     });
+  }
+
+  async answerPrompt(question: string) {
+    var response;
+    const history = await ShortTermMemoryService.getInstance().queryShortTermMemory(question);
+    const context = await LongTermMemoryService.getInstance().queryLongTermMemory(question);
+    try {
+      response = await this.queryAll(question, history, context);
+      if (response) {
+        await ShortTermMemoryService.getInstance().addDocumentsToMemoryVectorStore([
+          { content: question, metadataType: 'question' },
+          { content: response?.text, metadataType: 'answer' },
+        ]);
+        //await logChat(chatLogDirectory, question, response.response);
+      }
+    } catch (error) {
+      if (error instanceof Error && error.message.includes('Cancel:')) {
+      } else if (error instanceof Error) {
+        //output.write(chalk.red(error.message));
+      } else {
+        //output.write(chalk.red(error));
+      }
+    }
+    return response?.text;
   }
 }
